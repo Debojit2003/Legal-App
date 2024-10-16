@@ -1,11 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Auth.css";
 import googleLogo from "../assets/images/google.png"; // Import Google logo
 import appleLogo from "../assets/images/apple.png"; // Import Apple logo
 import profileuser from "../assets/images/profile-user.png";
+
 const LoginPage = () => {
   const navigate = useNavigate();
+
+  // State to toggle password visibility
+  const [passwordVisible, setPasswordVisible] = useState(false);
+
+  // Function to toggle the password visibility
+  const togglePasswordVisibility = () => {
+    setPasswordVisible(!passwordVisible);
+  };
+
   return (
     <div className="auth-container">
       <div className="auth-card">
@@ -22,15 +32,23 @@ const LoginPage = () => {
         <form className="auth-form">
           <label>Sign In as</label>
           <select>
-            <option>Prisoner</option>
+            <option>Family-Member</option>
             <option>Lawyer</option>
             <option>Jail-Authority</option>
           </select>
 
           <input type="text" placeholder="User name or Email ID" />
           <div className="password-container">
-            <input type="password" placeholder="Password" />
-            <span className="toggle-password">👁️</span>
+            <input
+              type={passwordVisible ? "text" : "password"}
+              placeholder="Password"
+            />
+            <span
+              className="toggle-password"
+              onClick={togglePasswordVisibility}
+            >
+              {passwordVisible ? "🙈" : "👁️"}
+            </span>
           </div>
 
           <button type="submit" className="btn sign-in-btn">
