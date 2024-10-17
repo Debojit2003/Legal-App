@@ -3,9 +3,9 @@ Overview
 The Legal Assistance App is a comprehensive platform designed to provide legal aid and consultation services. This project aims to simplify access to legal resources by connecting users with legal professionals and offering valuable tools for legal research, case tracking, and appointment scheduling.
 
 Features
-> User Registration and Authentication: Secure sign-up and login functionality.
-> Lawyer Consultation: Connect users with certified lawyers for consultation.
-> Case Management: Users can track their ongoing legal cases.
+User Registration and Authentication: Secure sign-up and login functionality.
+Lawyer Consultation: Connect users with certified lawyers for consultation.
+Case Management: Users can track their ongoing legal cases.
 Document Upload: Securely upload and manage legal documents.
 Legal Resources: Access a repository of legal articles, case studies, and templates.
 Appointment Scheduling: Book and manage appointments with legal professionals.
