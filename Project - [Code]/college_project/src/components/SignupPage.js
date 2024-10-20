@@ -32,7 +32,7 @@ const SignupPage = () => {
         <form className="auth-form">
           <label>Sign In as</label>
           <select>
-            <option>Prisoner</option>
+            <option>Family-Member</option>
             <option>Lawyer</option>
             <option>Jail-Authority</option>
           </select>
