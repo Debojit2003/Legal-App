@@ -4,7 +4,7 @@ import email from "../assets/images/email.png";
 import chatbot from "../assets/images/chatbot.png";
 import casest from "../assets/images/file.png";
 import home from "../assets/images/home.png";
-import profile from "../assets/images/profile-user.png";
+import user from "../assets/images/profile-user.png";
 import about from "../assets/images/about.png";
 import setting from "../assets/images/settings.png";
 
@@ -44,7 +44,7 @@ const LawyerPage = () => {
           <span className="badge">1</span>
         </div>
         <div className="nav-item">
-          <img src={profile} alt="Profile" />
+          <img src={user} alt="Profile" />
           <p>Profile</p>
         </div>
         <div className="nav-item">
