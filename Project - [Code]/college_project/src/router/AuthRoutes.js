@@ -12,6 +12,9 @@ const AuthRoutes = () => {
         {/* <Route path="/login" element={<LoginPage />} /> */}
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/lawyer" element={<LawyerPage />} />
+        <Route path="/jail-authority" element={<JailAuthorityPage />} />
+        <Route path="/family-member" element={<FamilyMemberPage />} />
+        
       </Routes>
     </Router>
   );
