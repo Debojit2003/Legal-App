@@ -34,6 +34,7 @@ const LoginPage = () => {
         <form className="auth-form">
           <label>Sign In as</label>
           <select>
+            <option value="" disabled selected>Select user category</option>
             <option>Family-Member</option>
             <option>Lawyer</option>
             <option>Jail-Authority</option>
