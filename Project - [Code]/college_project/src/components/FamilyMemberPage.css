@@ -1,0 +1,107 @@
+/* Ensure the container takes up the full height of the viewport */
+.family-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh; /* Full viewport height */
+  background-color: #f4dcc8;
+  padding: 10px;
+  box-sizing: border-box; /* Ensure padding doesn't cause overflow */
+  overflow: hidden; /* Prevent any accidental overflow */
+}
+
+/* Header Section */
+.family-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px; /* Reduced padding */
+}
+
+.title {
+  font-size: 22px; /* Slightly smaller title */
+  color: #a55e3b;
+  font-weight: bold;
+}
+
+.header-icons {
+  display: flex;
+  gap: 10px; /* Reduced gap between icons */
+}
+
+.menu-icon,
+.language-icon {
+  font-size: 22px; /* Slightly smaller icon size */
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+.menu-icon:hover,
+.language-icon:hover {
+  transform: scale(1.1);
+}
+
+/* Content Section */
+.content-section {
+  flex-grow: 1; /* Allow the content to expand, but not exceed the available space */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around; /* Space out the cards evenly */
+  gap: 15px; /* Reduced gap between cards */
+  margin: 10px 0; /* Slight margin for aesthetics */
+}
+
+.card {
+  background-color: #f7e7d0;
+  border-radius: 12px; /* Slightly smaller radius */
+  padding: 15px; /* Reduced padding */
+  text-align: center;
+  position: relative;
+  transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out;
+  flex-grow: 1; /* Allow the card to grow to fill available space */
+}
+
+.card img {
+  width: 35px; /* Slightly smaller icon size */
+  margin-bottom: 8px;
+}
+
+.card p {
+  font-size: 16px; /* Slightly smaller font size */
+  font-weight: 600;
+  color: #533a2d;
+}
+
+.card:hover {
+  transform: translateY(-3px); /* Slightly smaller hover effect */
+  background-color: #e0d3b8;
+}
+
+/* Bottom Navigation */
+.bottom-nav {
+  display: flex;
+  justify-content: space-between;
+  background-color: #f7e7d0;
+  padding: 8px 15px; /* Reduced padding */
+  border-radius: 15px; /* Slightly smaller radius */
+}
+
+.nav-item {
+  text-align: center;
+  position: relative;
+  transition: transform 0.2s ease-in-out;
+}
+
+.nav-item img {
+  width: 28px; /* Slightly smaller icon size */
+}
+
+.nav-item p {
+  margin: 3px 0 0; /* Reduced margin */
+  font-size: 12px; /* Slightly smaller font size */
+  color: #533a2d;
+}
+
+.nav-item:hover {
+  transform: translateY(-3px); /* Slight hover effect */
+}
