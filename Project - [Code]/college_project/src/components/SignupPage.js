@@ -4,6 +4,8 @@ import "./Auth.css";
 import googleLogo from "../assets/images/google.png"; // Import Google logo
 import appleLogo from "../assets/images/apple.png"; // Import Apple logo
 import profileuser from "../assets/images/profile-user.png";
+import passopen from "../assets/images/eye.png";
+import passclose from "../assets/images/hide.png";
 
 const SignupPage = () => {
   const navigate = useNavigate();
@@ -47,7 +49,19 @@ const SignupPage = () => {
               className="toggle-password"
               onClick={togglePasswordVisibility}
             >
-              {passwordVisible ? "🙈" : "👁️"}
+              {passwordVisible ?(
+                <img 
+                  src={passopen} 
+                  alt="Show Password"
+                  style={{ width: '20px', height: '20px' }}
+               />
+              ) : (
+                <img 
+                  src={passclose} 
+                  alt="Hide Password" 
+                  style={{ width: '20px', height: '20px' }}
+               />
+              )}
             </span>
           </div>
           <button type="submit" className="btn sign-up-btn">
