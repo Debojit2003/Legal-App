@@ -5,7 +5,7 @@ import legalservice from "../assets/images/legal-service.png";
 import usercase from "../assets/images/file.png";
 import chatbot from "../assets/images/chatbot.png";
 import home from "../assets/images/home.png";
-import user from "../assets/images/profile-user.png";
+import user from "../assets/images/user.png";
 import about from "../assets/images/about.png";
 import setting from "../assets/images/settings.png";
 const FamilyMemberPage = () => {
