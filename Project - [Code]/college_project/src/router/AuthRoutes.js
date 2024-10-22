@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import SignupPage from "../components/SignupPage";
 import LoginPage from "../components/LoginPage";
 import LawyerPage from "../components/LawyerPage";
+import JailAuthorityPage from "../components/JailAuthorityPage";
+import FamilyMemberPage from "../components/Family_member";
 const AuthRoutes = () => {
   return (
     <Router>
