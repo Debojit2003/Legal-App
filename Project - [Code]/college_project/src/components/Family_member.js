@@ -8,6 +8,7 @@ import home from "../assets/images/home.png";
 import user from "../assets/images/user.png";
 import about from "../assets/images/about.png";
 import setting from "../assets/images/settings.png";
+import globe from "../assets/images/languages.png";
 const FamilyMemberPage = () => {
   return (
     <div className="family-container">
@@ -15,7 +16,13 @@ const FamilyMemberPage = () => {
         <h1 className="title">TrialTech</h1>
         <div className="header-icons">
           <span className="menu-icon">☰</span>
-          <span className="language-icon">🌍</span>
+          <span className="language-icon">
+             <img
+              src={globe}
+              alt="Language"
+              style={{ width: '30px', height: '30px' }}
+             />        
+          </span>
         </div>
       </header>
 
