@@ -4,7 +4,7 @@ import dashboard from "../assets/images/dashboard.png";
 import chatbot from "../assets/images/chatbot.png";
 import bail from "../assets/images/bail.png";
 import home from "../assets/images/home.png";
-import user from "../assets/images/profile-user.png";
+import user from "../assets/images/user.png";
 import about from "../assets/images/about.png";
 import setting from "../assets/images/settings.png";
 const JailAuthorityPage = () => {
