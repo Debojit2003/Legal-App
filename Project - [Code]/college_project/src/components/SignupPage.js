@@ -1,23 +1,23 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Auth.css";
-import googleLogo from "../assets/images/google.png"; // Import Google logo
-import appleLogo from "../assets/images/apple.png"; // Import Apple logo
+import googleLogo from "../assets/images/google.png";
+import appleLogo from "../assets/images/apple.png";
 import profileuser from "../assets/images/profile-user.png";
 import passopen from "../assets/images/eye.png";
 import passclose from "../assets/images/hide.png";
 
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth } from './firebase'; // Adjust the path to your actual `firebase.js` location
+import { auth } from './firebase'; // Adjust the path to your actual firebase.js location
 import { getFirestore, doc, setDoc } from "firebase/firestore";
 
 const SignupPage = () => {
   const navigate = useNavigate();
-
-  // State to toggle password visibility
   const [passwordVisible, setPasswordVisible] = useState(false);
+  
+  // Regex pattern for Google emails
+  const googleEmailPattern = /\b[a-z]+[a-zA-Z0-9\.-]*@gmail\.com\b/;
 
-  // Function to toggle the password visibility
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
   };
@@ -28,6 +28,14 @@ const SignupPage = () => {
     const email = e.target.email.value;
     const password = e.target.password.value;
     const role = e.target.role.value;
+    const name = e.target.name.value;
+    
+    // Check if email matches @google.com pattern
+    if (!googleEmailPattern.test(email)) {
+      alert("Please use a valid @gmail.com email address.");
+      return;
+    }
+
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
@@ -35,11 +43,12 @@ const SignupPage = () => {
       // Save the user's role in Firestore
       const db = getFirestore();
       await setDoc(doc(db, "users", user.uid), {
+        name: name,
         email: user.email,
         role: role,
       });
 
-      alert("Registration successful!");
+      alert(`Registration successful!`);
       navigate("/"); // Redirect to the home page or another page
     } catch (error) {
       alert(`Error creating account: ${error.message}`);
@@ -61,26 +70,27 @@ const SignupPage = () => {
           <button className="btn active">Sign Up</button>
         </div>
         <form className="auth-form" onSubmit={handleRegistration}>
-          <label>Sign In as</label>
-          <select name="role">
-            <option value="" disabled selected>Select user category</option>
+          <label>Sign Up as</label>
+          <select name="role" required defaultValue="">
+            <option value="" disabled>Select user category</option>
             <option>Family-Member</option>
             <option>Lawyer</option>
             <option>Jail-Authority</option>
           </select>
-          <input type="text" placeholder="Full Name" />
-          <input type="email" name="email" placeholder="Email" />
+          <input type="text" name="name" placeholder="Full Name" required />
+          <input type="email" name="email" placeholder="Email" required />
           <div className="password-container">
             <input
               type={passwordVisible ? "text" : "password"}
               name="password"
               placeholder="Password"
+              required
             />
             <span
               className="toggle-password"
               onClick={togglePasswordVisibility}
             >
-              {passwordVisible ?(
+              {passwordVisible ? (
                 <img 
                   src={passopen} 
                   alt="Show Password"
@@ -115,4 +125,3 @@ const SignupPage = () => {
 };
 
 export default SignupPage;
-
