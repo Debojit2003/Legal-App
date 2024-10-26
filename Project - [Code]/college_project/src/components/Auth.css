@@ -124,6 +124,7 @@ select:focus {
   font-size: 16px;
   font-weight: bold;
   transition: background-color 0.3s ease;
+  margin-left: 25%;
 }
 
 .sign-up-btn:hover {
@@ -163,6 +164,7 @@ select:focus {
 
 .google-btn {
   border-color: #4285f4;
+  margin-top: 10px;
 }
 
 .apple-btn {
@@ -186,4 +188,17 @@ select:focus {
   .sign-up-btn {
     font-size: 14px;
   }
+}
+
+.sign-in-btn {
+  background-color: #d77a4f;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  margin-left: 25%;
+}
+
+.forgot-password a {
+  margin: 15px;
 }
