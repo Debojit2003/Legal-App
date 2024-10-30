@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./LawyerPage.css";
 import email from "../assets/images/email.png";
 import chatbot from "../assets/images/chatbot.png";
@@ -10,6 +11,21 @@ import setting from "../assets/images/settings.png";
 import globe from "../assets/images/languages.png";
 
 const LawyerPage = () => {
+  const [showSettings, setShowSettings] = useState(false);
+  const navigate = useNavigate();
+
+  const toggleSettings = () => {
+    setShowSettings(!showSettings);
+  };
+
+  const handleLogout = () => {
+    navigate("/");
+  };
+
+  const handleNavigation = (path) => {
+    navigate(path);
+  };
+
   return (
     <div className="lawyer-container">
       <header className="lawyer-header">
@@ -17,11 +33,11 @@ const LawyerPage = () => {
         <div className="header-icons">
           <span className="menu-icon">☰</span>
           <span className="language-icon">
-          <img
-            src={globe}
-            alt="Language"
-            style={{ width: '30px', height: '30px' }}
-          />
+            <img
+              src={globe}
+              alt="Language"
+              style={{ width: "30px", height: "30px" }}
+            />
           </span>
         </div>
       </header>
@@ -29,7 +45,7 @@ const LawyerPage = () => {
       <div className="content-section">
         <div className="card pending-appointments">
           <img src={email} alt="Pending Appointments" />
-          <span className="badge">0</span>
+
           <p>Pending Appointments</p>
         </div>
 
@@ -45,22 +61,27 @@ const LawyerPage = () => {
       </div>
 
       <nav className="bottom-nav">
-        <div className="nav-item">
+        <div className="nav-item" onClick={() => handleNavigation("/lawyer")}>
           <img src={home} alt="Home" />
           <p>Home</p>
-          <span className="badge">1</span>
         </div>
         <div className="nav-item">
           <img src={user} alt="Profile" />
           <p>Profile</p>
         </div>
-        <div className="nav-item">
+        <div className="nav-item" onClick={() => handleNavigation("/about")}>
           <img src={about} alt="About" />
           <p>About</p>
         </div>
-        <div className="nav-item">
+        <div className="nav-item" onClick={toggleSettings}>
           <img src={setting} alt="Settings" />
           <p>Settings</p>
+          {showSettings && (
+            <div className="settings-dropdown">
+              <p>Edit Profile</p>
+              <p onClick={handleLogout}>Logout</p>
+            </div>
+          )}
         </div>
       </nav>
     </div>
