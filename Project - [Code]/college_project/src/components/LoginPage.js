@@ -95,7 +95,7 @@ const LoginPage = () => {
             <option>Jail-Authority</option>
           </select>
 
-          <input name="email" type="email" placeholder="User name or Email ID" required />
+          <input name="email" type="email" placeholder="Email Address" required />
           <div className="password-container">
             <input
               type={passwordVisible ? "text" : "password"}
