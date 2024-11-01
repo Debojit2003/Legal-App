@@ -77,7 +77,7 @@ const JailAuthorityPage = () => {
           <img src={setting} alt="Settings" />
           <p>Settings</p>
           {showSettingsPopup && (
-            <div className="settings-popup">
+            <div className="settings-dropdown">
               <p onClick={() => handleNavigation("/edit-profile")}>
                 Edit Profile
               </p>
