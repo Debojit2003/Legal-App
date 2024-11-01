@@ -27,6 +27,7 @@
   font-size: 22px;
   color: #a55e3b;
   font-weight: bold;
+  margin: 0px 0px 5px; 
 }
 
 /* Content Section for Cards */
@@ -143,12 +144,13 @@
 .settings-dropdown {
   position: absolute;
   bottom: 50px;
-  right: 15px;
+  right: 25px;
   background-color: white;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 5px;
-  padding: 10px;
+  border-radius: 6px;
+  padding: 6px;
   z-index: 100;
+  width: 100px;
 }
 
 .settings-dropdown p {
