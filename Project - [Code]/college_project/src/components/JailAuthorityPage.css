@@ -5,20 +5,28 @@
   height: 100vh;
   background-color: #f4dcc8;
   padding: 10px;
+  align-items: center;
 }
 
 /* Header Section */
 .jail-header {
+  width: 100%;
+  max-width: 500px; /* Consistent width */
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px;
+  padding: 20px;
+  background-color: #f7e7d0;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
 }
 
 .title {
   font-size: 24px;
   color: #a55e3b;
   font-weight: bold;
+  margin: 0px 0px 5px; 
 }
 
 .header-icons {
@@ -53,6 +61,10 @@
   padding: 20px;
   text-align: center;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out;
 }
 
@@ -121,4 +133,47 @@
 
 .nav-item:hover {
   transform: translateY(-3px);
+}
+
+.settings-dropdown {
+  position: absolute;
+  bottom: 50px;
+  right: 25px;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+  padding: 6px;
+  z-index: 100;
+  width: 100px;
+}
+
+.settings-dropdown p {
+  margin: 0;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.settings-dropdown p:hover {
+  background-color: #ff4848;
+}
+
+.profile-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+.profile-popup-content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 300px;
+  text-align: center;
 }
