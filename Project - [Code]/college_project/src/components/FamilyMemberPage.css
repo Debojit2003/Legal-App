@@ -1,37 +1,43 @@
-/* Ensure the container takes up the full height of the viewport */
+/* General Container */
 .family-container {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 100vh; /* Full viewport height */
+  height: 100vh;
   background-color: #f4dcc8;
   padding: 10px;
-  box-sizing: border-box; /* Ensure padding doesn't cause overflow */
-  overflow: hidden; /* Prevent any accidental overflow */
+  align-items: center;
 }
 
 /* Header Section */
 .family-header {
+  width: 100%;
+  max-width: 500px; /* Consistent width */
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px; /* Reduced padding */
+  padding: 20px;
+  background-color: #f7e7d0;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
 }
 
 .title {
-  font-size: 22px; /* Slightly smaller title */
+  font-size: 22px;
   color: #a55e3b;
   font-weight: bold;
+  margin: 0px 0px 5px; 
 }
 
 .header-icons {
   display: flex;
-  gap: 10px; /* Reduced gap between icons */
+  gap: 10px;
 }
 
 .menu-icon,
 .language-icon {
-  font-size: 22px; /* Slightly smaller icon size */
+  font-size: 22px;
   cursor: pointer;
   transition: transform 0.2s ease-in-out;
 }
@@ -43,37 +49,37 @@
 
 /* Content Section */
 .content-section {
-  flex-grow: 1; /* Allow the content to expand, but not exceed the available space */
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
-  justify-content: space-around; /* Space out the cards evenly */
-  gap: 15px; /* Reduced gap between cards */
-  margin: 10px 0; /* Slight margin for aesthetics */
+  justify-content: space-around;
+  gap: 15px;
+  margin: 10px 0;
 }
 
 .card {
   background-color: #f7e7d0;
-  border-radius: 12px; /* Slightly smaller radius */
-  padding: 15px; /* Reduced padding */
+  border-radius: 12px;
+  padding: 15px;
   text-align: center;
   position: relative;
   transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out;
-  flex-grow: 1; /* Allow the card to grow to fill available space */
+  flex-grow: 1;
 }
 
 .card img {
-  width: 35px; /* Slightly smaller icon size */
+  width: 35px;
   margin-bottom: 8px;
 }
 
 .card p {
-  font-size: 16px; /* Slightly smaller font size */
+  font-size: 16px;
   font-weight: 600;
   color: #533a2d;
 }
 
 .card:hover {
-  transform: translateY(-3px); /* Slightly smaller hover effect */
+  transform: translateY(-3px);
   background-color: #e0d3b8;
 }
 
@@ -82,8 +88,8 @@
   display: flex;
   justify-content: space-between;
   background-color: #f7e7d0;
-  padding: 8px 15px; /* Reduced padding */
-  border-radius: 15px; /* Slightly smaller radius */
+  padding: 8px 15px;
+  border-radius: 15px;
 }
 
 .nav-item {
@@ -93,29 +99,29 @@
 }
 
 .nav-item img {
-  width: 28px; /* Slightly smaller icon size */
+  width: 28px;
 }
 
 .nav-item p {
-  margin: 3px 0 0; /* Reduced margin */
-  font-size: 12px; /* Slightly smaller font size */
+  margin: 3px 0 0;
+  font-size: 12px;
   color: #533a2d;
 }
 
 .nav-item:hover {
-  transform: translateY(-3px); /* Slight hover effect */
+  transform: translateY(-3px);
 }
 
 .settings-popup {
   position: absolute;
+  bottom: 50px;
+  right: 25px;
   background-color: white;
-  border-radius: 8px;
-  border: 1px solid #ddd;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-  padding: 10px;
-  top: -80px; /* Adjust as needed */
-  right: 0;
-  z-index: 1;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+  padding: 6px;
+  z-index: 100;
+  width: 100px;
 }
 
 .settings-popup p {
