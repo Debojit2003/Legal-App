@@ -48,8 +48,41 @@ const SignupPage = () => {
         role: role,
       });
 
-      alert(`Registration successful!`);
-      navigate("/"); // Redirect to the home page or another page
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+
+      // Fetch the user's role from Firestore
+      // const db = getFirestore();
+      const userDoc = await getDoc(doc(db, "users", user.uid));
+      if (userDoc.exists()) {
+        const userData = userDoc.data();
+        const userRole = userData.role;
+
+        // Compare the roles and redirect based on role
+        if (userRole === role) {
+          //alert('Login successful!');
+          switch (userRole) {
+            case 'Family-Member':
+              navigate('/family-member');
+              break;
+            case 'Lawyer':
+              navigate('/lawyer');
+              break;
+            case 'Jail-Authority':
+              navigate('/jail-authority');
+              break;
+            default:
+              alert('Unknown role');
+          }
+        } else {
+          alert('Role mismatch. Please select the correct role.');
+        }
+      } else {
+        alert('No such user found in Firestore.');
+      }
+
+      //alert(`Registration successful!`);
+      //navigate("/"); // Redirect to the home page or another page
     } catch (error) {
       alert(`Error creating account: ${error.message}`);
       // Handle any errors (e.g., invalid email, weak password, etc.)
