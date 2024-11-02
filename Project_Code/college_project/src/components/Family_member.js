@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./FamilyMemberPage.css";
 import ngo from "../assets/images/ngo.png";
 import legalservice from "../assets/images/legal-service.png";
@@ -9,7 +10,19 @@ import user from "../assets/images/user.png";
 import about from "../assets/images/about.png";
 import setting from "../assets/images/settings.png";
 import globe from "../assets/images/languages.png";
+
 const FamilyMemberPage = () => {
+  const [showSettingsPopup, setShowSettingsPopup] = useState(false);
+  const navigate = useNavigate();
+
+  const handleNavigation = (path) => {
+    navigate(path);
+  };
+
+  const toggleSettingsPopup = () => {
+    setShowSettingsPopup(!showSettingsPopup);
+  };
+
   return (
     <div className="family-container">
       <header className="family-header">
@@ -17,11 +30,11 @@ const FamilyMemberPage = () => {
         <div className="header-icons">
           <span className="menu-icon">☰</span>
           <span className="language-icon">
-             <img
+            <img
               src={globe}
               alt="Language"
-              style={{ width: '30px', height: '30px' }}
-             />        
+              style={{ width: "30px", height: "30px" }}
+            />
           </span>
         </div>
       </header>
@@ -49,7 +62,10 @@ const FamilyMemberPage = () => {
       </div>
 
       <nav className="bottom-nav">
-        <div className="nav-item">
+        <div
+          className="nav-item"
+          onClick={() => handleNavigation("/family-member")}
+        >
           <img src={home} alt="Home" />
           <p>Home</p>
         </div>
@@ -57,13 +73,24 @@ const FamilyMemberPage = () => {
           <img src={user} alt="Profile" />
           <p>Profile</p>
         </div>
-        <div className="nav-item">
+        <div
+          className="nav-item"
+          onClick={() => handleNavigation("/about-family")}
+        >
           <img src={about} alt="About" />
           <p>About</p>
         </div>
-        <div className="nav-item">
+        <div className="nav-item" onClick={toggleSettingsPopup}>
           <img src={setting} alt="Settings" />
           <p>Settings</p>
+          {showSettingsPopup && (
+            <div className="settings-popup">
+              <p onClick={() => handleNavigation("/edit-profile")}>
+                Edit Profile
+              </p>
+              <p onClick={() => handleNavigation("/")}>Logout</p>
+            </div>
+          )}
         </div>
       </nav>
     </div>

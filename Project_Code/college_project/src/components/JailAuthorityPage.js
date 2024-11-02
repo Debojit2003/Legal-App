@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./JailAuthorityPage.css";
 import dashboard from "../assets/images/dashboard.png";
 import chatbot from "../assets/images/chatbot.png";
@@ -9,6 +10,16 @@ import about from "../assets/images/about.png";
 import setting from "../assets/images/settings.png";
 import globe from "../assets/images/languages.png";
 const JailAuthorityPage = () => {
+  const [showSettingsPopup, setShowSettingsPopup] = useState(false);
+  const navigate = useNavigate();
+
+  const handleNavigation = (path) => {
+    navigate(path);
+  };
+
+  const toggleSettingsPopup = () => {
+    setShowSettingsPopup(!showSettingsPopup);
+  };
   return (
     <div className="jail-container">
       <header className="jail-header">
@@ -19,8 +30,8 @@ const JailAuthorityPage = () => {
             <img
               src={globe}
               alt="Language"
-              style={{ width: '30px', height: '30px' }}
-           />        
+              style={{ width: "30px", height: "30px" }}
+            />
           </span>
         </div>
       </header>
@@ -33,7 +44,7 @@ const JailAuthorityPage = () => {
 
         <div className="card bail-consideration">
           <img src={bail} alt="Bail Consideration" />
-          <span className="badge">1</span>
+
           <p>Bail Consideration Application</p>
         </div>
 
@@ -44,22 +55,35 @@ const JailAuthorityPage = () => {
       </div>
 
       <nav className="bottom-nav">
-        <div className="nav-item">
+        <div
+          className="nav-item"
+          onClick={() => handleNavigation("/jail-authority")}
+        >
           <img src={home} alt="Home" />
           <p>Home</p>
-          <span className="badge">1</span>
         </div>
         <div className="nav-item">
           <img src={user} alt="Profile" />
           <p>Profile</p>
         </div>
-        <div className="nav-item">
+        <div
+          className="nav-item"
+          onClick={() => handleNavigation("/aboutjail")}
+        >
           <img src={about} alt="About" />
           <p>About</p>
         </div>
-        <div className="nav-item">
+        <div className="nav-item" onClick={toggleSettingsPopup}>
           <img src={setting} alt="Settings" />
           <p>Settings</p>
+          {showSettingsPopup && (
+            <div className="settings-dropdown">
+              <p onClick={() => handleNavigation("/edit-profile")}>
+                Edit Profile
+              </p>
+              <p onClick={() => handleNavigation("/")}>Logout</p>
+            </div>
+          )}
         </div>
       </nav>
     </div>
