@@ -69,7 +69,10 @@ const FamilyMemberPage = () => {
           <img src={home} alt="Home" />
           <p>Home</p>
         </div>
-        <div className="nav-item">
+        <div 
+          className="nav-item"
+          onClick={() => handleNavigation("/profile")}
+        >
           <img src={user} alt="Profile" />
           <p>Profile</p>
         </div>
