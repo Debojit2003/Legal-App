@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import ContactUsForm from "./ContactUsForm";
 import "./About.css"; // Create this CSS file for styling
 
 const AboutUsfamily = () => {
   const navigate = useNavigate();
+  const [showContactForm, setShowContactForm] = useState(false);
+
+  const openContactForm = () => setShowContactForm(true);
+  const closeContactForm = () => setShowContactForm(false);
   return (
     <div className="about-us-container">
       <header className="about-us-header">
@@ -43,8 +48,9 @@ const AboutUsfamily = () => {
       <footer className="about-us-footer">
         <button onClick={() => navigate("/family-member")}>Home</button>
         <p>&copy; TrialTech 2024</p>
-        <button onClick={() => navigate("/")}>Contact Us</button>
+        <button onClick={openContactForm}>Contact Us</button>
       </footer>
+      {showContactForm && <ContactUsForm onClose={closeContactForm} />}
     </div>
   );
 };
