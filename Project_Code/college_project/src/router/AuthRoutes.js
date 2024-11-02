@@ -9,12 +9,14 @@ import FamilyMemberPage from "../components/Family_member";
 import AboutUsPage from "../components/AboutUsPage";
 import AboutUsfamily from "../components/AboutUsfamily";
 import AboutUsjail from "../components/AboutUsJail";
+import ProfilePage from "../components/Profile";
 const AuthRoutes = () => {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<LoginPage />} /> {/* Default route */}
         {/* <Route path="/login" element={<LoginPage />} /> */}
+        <Route path="/profile" element={<ProfilePage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/lawyer" element={<LawyerPage />} />
         <Route path="/jail-authority" element={<JailAuthorityPage />} />
