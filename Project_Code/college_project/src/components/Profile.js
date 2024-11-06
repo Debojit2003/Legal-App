@@ -81,7 +81,7 @@ const ProfilePage = () => {
             <p><img
                   src={prof}
                   alt="profile image"
-                  style={{ width: '100px', height: '100px' }}
+                  style={{ width: '120px', height: '120px', marginTop: "30px", marginBottom: "40px" }}
                /></p>
             <p><strong>Name:</strong> {userData.name}</p>
             <p><strong>Email:</strong> {userData.email}</p>
