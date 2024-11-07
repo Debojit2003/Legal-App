@@ -121,7 +121,7 @@
   border-radius: 6px;
   padding: 6px;
   z-index: 100;
-  width: 100px;
+  width: 120px;
 }
 
 .settings-popup p {
@@ -131,5 +131,5 @@
 }
 
 .settings-popup p:hover {
-  background-color: #f0f0f0;
+  background-color: #e63939;
 }
