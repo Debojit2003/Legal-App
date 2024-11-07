@@ -8,7 +8,7 @@ import home from "../assets/images/home.png";
 import user from "../assets/images/user.png";
 import about from "../assets/images/about.png";
 import setting from "../assets/images/settings.png";
-import globe from "../assets/images/languages.png";
+import LanguageSelector from "./LanguageSelector";
 
 const LawyerPage = () => {
   const [showSettings, setShowSettings] = useState(false);
@@ -33,11 +33,7 @@ const LawyerPage = () => {
         <div className="header-icons">
           <span className="menu-icon">☰</span>
           <span className="language-icon">
-            <img
-              src={globe}
-              alt="Language"
-              style={{ width: "30px", height: "30px" }}
-            />
+            <LanguageSelector />
           </span>
         </div>
       </header>
