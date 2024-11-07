@@ -23,6 +23,11 @@ const FamilyMemberPage = () => {
     setShowSettingsPopup(!showSettingsPopup);
   };
 
+  const handleLanguageSelect = (language) => {
+    alert(`Selected language: ${language}`);
+    // You could also set this in local storage or state if needed
+  };
+
   return (
     <div className="family-container">
       <header className="family-header">
@@ -35,6 +40,14 @@ const FamilyMemberPage = () => {
               alt="Language"
               style={{ width: "30px", height: "30px" }}
             />
+            <div className="language-options">
+              <p onClick={() => handleLanguageSelect("English")}>English</p>
+              <p onClick={() => handleLanguageSelect("বাংলা")}>বাংলা</p>
+              <p onClick={() => handleLanguageSelect("हिंदी")}>हिंदी</p>
+              <p onClick={() => handleLanguageSelect("Español")}>Español</p>
+              <p onClick={() => handleLanguageSelect("Français")}>Français</p>
+              <p onClick={() => handleLanguageSelect("Deutsch")}>Deutsch</p>
+            </div>
           </span>
         </div>
       </header>
@@ -44,17 +57,14 @@ const FamilyMemberPage = () => {
           <img src={legalservice} alt="Legal Services" />
           <p>Legal Services</p>
         </div>
-
         <div className="card case-status">
           <img src={usercase} alt="Case Status" />
           <p>Case Status</p>
         </div>
-
         <div className="card rehab-centres">
           <img src={ngo} alt="Rehabilitation Centre/NGOs" />
           <p>Rehabilitation Centre/NGOs</p>
         </div>
-
         <div className="card chatbot">
           <img src={chatbot} alt="Chatbot" />
           <p>Chatbot</p>
@@ -62,24 +72,15 @@ const FamilyMemberPage = () => {
       </div>
 
       <nav className="bottom-nav">
-        <div
-          className="nav-item"
-          onClick={() => handleNavigation("/family-member")}
-        >
+        <div className="nav-item" onClick={() => handleNavigation("/family-member")}>
           <img src={home} alt="Home" />
           <p>Home</p>
         </div>
-        <div 
-          className="nav-item"
-          onClick={() => handleNavigation("/profile")}
-        >
+        <div className="nav-item" onClick={() => handleNavigation("/profile")}>
           <img src={user} alt="Profile" />
           <p>Profile</p>
         </div>
-        <div
-          className="nav-item"
-          onClick={() => handleNavigation("/about-family")}
-        >
+        <div className="nav-item" onClick={() => handleNavigation("/about-family")}>
           <img src={about} alt="About" />
           <p>About</p>
         </div>
@@ -88,9 +89,7 @@ const FamilyMemberPage = () => {
           <p>Settings</p>
           {showSettingsPopup && (
             <div className="settings-popup">
-              <p onClick={() => handleNavigation("/edit-profile")}>
-                Edit Profile
-              </p>
+              <p onClick={() => handleNavigation("/edit-profile")}>Edit Profile</p>
               <p onClick={() => handleNavigation("/")}>Logout</p>
             </div>
           )}
