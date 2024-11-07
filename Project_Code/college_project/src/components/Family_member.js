@@ -9,7 +9,7 @@ import home from "../assets/images/home.png";
 import user from "../assets/images/user.png";
 import about from "../assets/images/about.png";
 import setting from "../assets/images/settings.png";
-import globe from "../assets/images/languages.png";
+import LanguageSelector from "./LanguageSelector";
 
 const FamilyMemberPage = () => {
   const [showSettingsPopup, setShowSettingsPopup] = useState(false);
@@ -23,11 +23,6 @@ const FamilyMemberPage = () => {
     setShowSettingsPopup(!showSettingsPopup);
   };
 
-  const handleLanguageSelect = (language) => {
-    alert(`Selected language: ${language}`);
-    // You could also set this in local storage or state if needed
-  };
-
   return (
     <div className="family-container">
       <header className="family-header">
@@ -35,19 +30,7 @@ const FamilyMemberPage = () => {
         <div className="header-icons">
           <span className="menu-icon">☰</span>
           <span className="language-icon">
-            <img
-              src={globe}
-              alt="Language"
-              style={{ width: "30px", height: "30px" }}
-            />
-            <div className="language-options">
-              <p onClick={() => handleLanguageSelect("English")}>English</p>
-              <p onClick={() => handleLanguageSelect("বাংলা")}>বাংলা</p>
-              <p onClick={() => handleLanguageSelect("हिंदी")}>हिंदी</p>
-              <p onClick={() => handleLanguageSelect("Español")}>Español</p>
-              <p onClick={() => handleLanguageSelect("Français")}>Français</p>
-              <p onClick={() => handleLanguageSelect("Deutsch")}>Deutsch</p>
-            </div>
+            <LanguageSelector />
           </span>
         </div>
       </header>
