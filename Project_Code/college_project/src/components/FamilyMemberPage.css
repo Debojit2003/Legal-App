@@ -73,7 +73,7 @@
 }
 
 .card p {
-  font-size: 16px;
+  font-size: 10px;
   font-weight: 600;
   color: #533a2d;
 }
@@ -132,4 +132,39 @@
 
 .settings-popup p:hover {
   background-color: #e63939;
+}
+
+/* Language icon and options */
+.language-icon {
+  position: relative;
+  cursor: pointer;
+  z-index:20;
+}
+
+.language-options {
+  display: none;
+  position: absolute;
+  top: 40px; /* Adjust based on your layout */
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  font-size: medium;
+  z-index: 1;
+}
+
+.language-options p {
+  margin: 0;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.language-options p:hover {
+  background-color: #f4e3d4;
+}
+
+/* Show the language options on hover */
+.language-icon:hover .language-options {
+  display: block;
 }
