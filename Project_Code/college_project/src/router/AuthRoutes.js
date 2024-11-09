@@ -13,6 +13,7 @@ import ProfilePage from "../components/Profile";
 import LawyerCases from "../components/LawyerCases";
 import JailerDashboard from "../components/JailerDashboard";
 import LawyerSearch from "../components/LawyerSearch";
+import FamilyCase from "../components/FamilyMemberCases.js";
 const AuthRoutes = () => {
   return (
     <Router>
@@ -30,6 +31,7 @@ const AuthRoutes = () => {
         <Route path="/aboutjail" element={<AboutUsjail />} />
         <Route path="/lawyer-cases" element={<LawyerCases />} />
         <Route path="/dashboard" element={<JailerDashboard />} />
+        <Route path="/family-case" element={<FamilyCase />} />
       </Routes>
     </Router>
   );
