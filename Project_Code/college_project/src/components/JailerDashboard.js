@@ -52,7 +52,7 @@ const JailerDashboard = () => {
             ) : (
               familyMembers.map((member, index) => (
                 <div key={index} className="family-member-card">
-                  <h3>{member.name}</h3>
+                  <h2>{member.name}</h2>
                   <p>
                     <strong>Address:</strong> {member.address}
                   </p>
