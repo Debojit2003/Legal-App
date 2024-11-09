@@ -41,11 +41,13 @@ const LawyerPage = () => {
       <div className="content-section">
         <div className="card pending-appointments">
           <img src={email} alt="Pending Appointments" />
-
           <p>Pending Appointments</p>
         </div>
 
-        <div className="card current-case-status">
+        <div
+          className="card current-case-status"
+          onClick={() => handleNavigation("/lawyer-cases")} // Navigates to the LawyerCases page
+        >
           <img src={casest} alt="Current Case Status" />
           <p>Current case status</p>
         </div>
@@ -61,10 +63,7 @@ const LawyerPage = () => {
           <img src={home} alt="Home" />
           <p>Home</p>
         </div>
-        <div 
-          className="nav-item"
-          onClick={() => handleNavigation("/profile")}
-        >
+        <div className="nav-item" onClick={() => handleNavigation("/profile")}>
           <img src={user} alt="Profile" />
           <p>Profile</p>
         </div>
