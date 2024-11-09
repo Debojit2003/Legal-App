@@ -36,7 +36,7 @@ const FamilyMemberPage = () => {
       </header>
 
       <div className="content-section">
-        <div className="card legal-services">
+        <div className="card legal-services" onClick={() => handleNavigation("/lawyerSearch")}>
           <img src={legalservice} alt="Legal Services" />
           <p>Legal Services</p>
         </div>
