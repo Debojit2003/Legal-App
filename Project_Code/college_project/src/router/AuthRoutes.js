@@ -12,6 +12,7 @@ import AboutUsjail from "../components/AboutUsJail";
 import ProfilePage from "../components/Profile";
 import LawyerCases from "../components/LawyerCases";
 import JailerDashboard from "../components/JailerDashboard";
+import LawyerSearch from "../components/LawyerSearch";
 const AuthRoutes = () => {
   return (
     <Router>
@@ -19,6 +20,7 @@ const AuthRoutes = () => {
         <Route path="/" element={<LoginPage />} /> {/* Default route */}
         {/* <Route path="/login" element={<LoginPage />} /> */}
         <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/lawyerSearch" element={<LawyerSearch />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/lawyer" element={<LawyerPage />} />
         <Route path="/jail-authority" element={<JailAuthorityPage />} />
