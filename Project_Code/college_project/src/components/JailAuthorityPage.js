@@ -33,7 +33,10 @@ const JailAuthorityPage = () => {
       </header>
 
       <div className="content-section">
-        <div className="card dashboard">
+        <div
+          className="card dashboard"
+          onClick={() => handleNavigation("/dashboard")}
+        >
           <img src={dashboard} alt="Dashboard" />
           <p>Dashboard</p>
         </div>
@@ -58,10 +61,7 @@ const JailAuthorityPage = () => {
           <img src={home} alt="Home" />
           <p>Home</p>
         </div>
-        <div 
-          className="nav-item"
-          onClick={() => handleNavigation("/profile")}
-        >
+        <div className="nav-item" onClick={() => handleNavigation("/profile")}>
           <img src={user} alt="Profile" />
           <p>Profile</p>
         </div>
