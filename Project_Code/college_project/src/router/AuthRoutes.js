@@ -10,6 +10,8 @@ import AboutUsPage from "../components/AboutUsPage";
 import AboutUsfamily from "../components/AboutUsfamily";
 import AboutUsjail from "../components/AboutUsJail";
 import ProfilePage from "../components/Profile";
+import LawyerCases from "../components/LawyerCases";
+import JailerDashboard from "../components/JailerDashboard";
 const AuthRoutes = () => {
   return (
     <Router>
@@ -24,6 +26,8 @@ const AuthRoutes = () => {
         <Route path="/about" element={<AboutUsPage />} />
         <Route path="/about-family" element={<AboutUsfamily />} />
         <Route path="/aboutjail" element={<AboutUsjail />} />
+        <Route path="/lawyer-cases" element={<LawyerCases />} />
+        <Route path="/dashboard" element={<JailerDashboard />} />
       </Routes>
     </Router>
   );
