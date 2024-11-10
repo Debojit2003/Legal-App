@@ -27,10 +27,30 @@ const LawyerSearch = () => {
 
   const [lawyers, setLawyers] = useState([]);
 
-  const fetchLawyers = async (userId) => {
-    console.log("in mainBOsy");
+  const requestLawyer = async (Id) => {
+    //console.log("in mainbody");
     try {
-      console.log("Fetching lawyers for user:", userId);
+
+      const user = auth.currentUser;
+      const userId = user.uid;
+      console.log("Requesting lawyers for user:",Id, userId);
+
+      const lawyerRef = doc(db, 'lawyers', Id);
+
+      await setDoc(lawyerRef, {
+        requested_cases: arrayUnion(userId)
+      }, { merge: true });
+
+      
+    } catch (error) {
+      console.error("Error requesting lawyer:", error);
+    }
+  };
+
+  const fetchLawyers = async (userId) => {
+    //console.log("in mainbody");
+    try {
+      //console.log("Fetching lawyers for user:", userId);
 
       // Fetch user data from users collection
       const userRef = doc(db, 'users', userId);
@@ -50,7 +70,7 @@ const LawyerSearch = () => {
         throw new Error('User has no associated cases.');
       }
 
-      console.log("Fetched family data");
+      //console.log("Fetched family data");
 
       // Fetch the case details
       const caseId = familyMemberData.case_st_id[0]; // Assuming the user has at least one case
@@ -80,17 +100,10 @@ const LawyerSearch = () => {
     // Fetch lawyers when the component mounts
     const user = auth.currentUser;
     const userId = user.uid;
-    console.log(userId);
-    
-
-    // Get the current logged-in user
-    auth.onAuthStateChanged((user) => {
-      if (user) {
-        //fetchLawyers(user.uid);
-      } else {
-        navigate("/login"); // Redirect to login if no user is logged in
-      }
-    });
+    //console.log(userId);
+    if (user) {
+      fetchLawyers(user.uid);
+    }
   });
 
   return (
@@ -121,6 +134,9 @@ const LawyerSearch = () => {
             <p>Address: {lawyer.address}</p>
             <p>Type: {lawyer.type}</p>
             <p>Court Area: {lawyer.court_area}</p>
+            <button onClick={() => requestLawyer(lawyer.id)}>
+              Request Lawyer
+            </button>
           </div>
         ))}
       </div>
