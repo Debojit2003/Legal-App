@@ -14,6 +14,9 @@ import LawyerCases from "../components/LawyerCases";
 import JailerDashboard from "../components/JailerDashboard";
 import LawyerSearch from "../components/LawyerSearch";
 import FamilyCase from "../components/FamilyMemberCases.js";
+import NGODetailsPage from "../components/NGODetailsPage.js";
+import PendingCases from "../components/PendingCases.js";
+//mport NGODetailsPage from "../components/NGODetailsPage.js";
 const AuthRoutes = () => {
   return (
     <Router>
@@ -32,6 +35,8 @@ const AuthRoutes = () => {
         <Route path="/lawyer-cases" element={<LawyerCases />} />
         <Route path="/dashboard" element={<JailerDashboard />} />
         <Route path="/family-case" element={<FamilyCase />} />
+        <Route path="/ngo-details" element={<NGODetailsPage />} />
+        <Route path="/pending-case" element={<PendingCases />} />
       </Routes>
     </Router>
   );
