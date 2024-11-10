@@ -1,0 +1,40 @@
+/* NGODetailsPage.css */
+.ngo-details-page {
+  font-family: Arial, sans-serif;
+  background-color: #f7f7f7;
+  padding: 20px;
+}
+
+.ngo-details-page h2 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #003366;
+  margin-bottom: 20px;
+}
+
+.ngo-card {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.ngo-card h3 {
+  font-size: 20px;
+  font-weight: bold;
+  color: #003366;
+  margin-bottom: 10px;
+}
+
+.ngo-card p {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.ngo-card strong {
+  color: #003366;
+}
