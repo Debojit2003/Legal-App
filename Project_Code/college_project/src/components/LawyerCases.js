@@ -71,9 +71,10 @@ const LawyerCases = () => {
           onClick={() => handleNavigation("/lawyer")}>
           Home
         </button>
+        <h2 className="casetitle">Case Details:</h2>
       </div>
 
-      <h3>Case Details:</h3>
+      
       {caseDetails.length > 0 ? (
         <div className="case-cards">
           {caseDetails.map((caseData, index) => (
