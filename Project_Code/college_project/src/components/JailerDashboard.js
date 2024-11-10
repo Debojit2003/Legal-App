@@ -1,36 +1,171 @@
 import React, { useState, useEffect } from "react";
-import { getFirestore, collection, getDocs } from "firebase/firestore";
-import { useNavigate } from "react-router-dom"; // Import useNavigate for programmatic navigation
-import "./JailerDashboard.css"; // Your CSS file
+import {
+  getFirestore,
+  collection,
+  getDocs,
+  updateDoc,
+  doc,
+  getDoc,
+  arrayUnion,
+} from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
+import "./JailerDashboard.css";
 
 const JailerDashboard = () => {
   const [familyMembers, setFamilyMembers] = useState([]);
+  const [ngos, setNgos] = useState([]);
+  const [lawyers, setLawyers] = useState([]);
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate(); // Initialize navigate hook
+  const [selectedNGOs, setSelectedNGOs] = useState({});
+  const navigate = useNavigate();
 
   const db = getFirestore();
 
-  // Fetch family member details from Firestore
+  // Fetch family members data from Firestore
   const fetchFamilyMembers = async () => {
     try {
-      // Fetch family_member collection
       const querySnapshot = await getDocs(collection(db, "family_member"));
-      const familyRecords = querySnapshot.docs.map((doc) => doc.data());
+      const familyRecords = querySnapshot.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }));
       setFamilyMembers(familyRecords);
-
-      setLoading(false); // Set loading to false after fetching
     } catch (error) {
-      console.error("Error fetching data: ", error);
-      setLoading(false);
+      console.error("Error fetching family members: ", error);
+    }
+  };
+
+  // Fetch NGOs data from Firestore
+  const fetchNgos = async () => {
+    try {
+      const querySnapshot = await getDocs(collection(db, "ngo"));
+      const ngosData = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        name: doc.data().name,
+        address: doc.data().address,
+        contact_info: doc.data().contact_info,
+        report: doc.data().report,
+        seatno: doc.data().seatno,
+      }));
+      const filteredNgos = ngosData.filter((ngo) => ngo.seatno > 0);
+      setNgos(filteredNgos);
+    } catch (error) {
+      console.error("Error fetching NGOs: ", error);
+    }
+  };
+
+  // Fetch lawyer data from Firestore
+  const fetchLawyers = async () => {
+    try {
+      const querySnapshot = await getDocs(collection(db, "lawyers"));
+      const lawyersData = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        name: doc.data().name,
+      }));
+      setLawyers(lawyersData);
+    } catch (error) {
+      console.error("Error fetching lawyers: ", error);
     }
   };
 
   useEffect(() => {
-    fetchFamilyMembers();
+    const loadData = async () => {
+      setLoading(true);
+      await Promise.all([fetchFamilyMembers(), fetchNgos(), fetchLawyers()]);
+      setLoading(false);
+    };
+    loadData();
   }, []);
 
   const handleHomeClick = () => {
-    navigate("/jail-authority"); // Navigate to the jail_authority page
+    navigate("/jail-authority");
+  };
+
+  // Handle NGO selection for family member
+  const handleNGOSelect = async (memberId, ngoId) => {
+    if (!ngoId || !memberId) return;
+
+    try {
+      setLoading(true);
+
+      // Fetch NGO document
+      const ngoRef = doc(db, "ngo", ngoId);
+      const ngoSnapshot = await getDoc(ngoRef);
+
+      if (!ngoSnapshot.exists()) {
+        throw new Error("NGO not found");
+      }
+
+      const ngoData = ngoSnapshot.data();
+
+      // Check seat availability
+      if (ngoData.seatno <= 0) {
+        alert("No seats available for this NGO");
+        return;
+      }
+
+      // Update NGO document
+      await updateDoc(ngoRef, {
+        seatno: ngoData.seatno - 1,
+        family_member_id: arrayUnion(memberId),
+      });
+
+      // Update family member document to add selected NGO ID to ngo_id array
+      const familyMemberRef = doc(db, "family_member", memberId);
+      await updateDoc(familyMemberRef, {
+        ngo_id: arrayUnion(ngoId),
+      });
+
+      // Update selected NGOs state
+      setSelectedNGOs((prev) => ({
+        ...prev,
+        [memberId]: ngoId,
+      }));
+
+      alert("NGO successfully assigned!");
+
+      // Refresh data
+      await fetchNgos();
+      await fetchFamilyMembers();
+    } catch (error) {
+      console.error("Error selecting NGO:", error);
+      alert("Failed to assign NGO. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Get lawyer names based on lawyer IDs in family member data
+  const getLawyerName = (lawyerIds) => {
+    return lawyerIds
+      .map((lawyerId) => {
+        const lawyer = lawyers.find((lawyer) => lawyer.id === lawyerId);
+        return lawyer ? lawyer.name : "Unknown Lawyer";
+      })
+      .join(", ");
+  };
+
+  // Get NGO details based on ngo_id linked in family member data
+  const getNGODetails = (ngoId) => {
+    const ngo = ngos.find((ngo) => ngo.id === ngoId);
+    return ngo ? (
+      <>
+        <p>
+          <strong>Name:</strong> {ngo.name}
+        </p>
+        <p>
+          <strong>Address:</strong> {ngo.address}
+        </p>
+        <p>
+          <strong>Contact:</strong> {ngo.contact_info}
+        </p>
+        <p>
+          <strong>Report:</strong> {ngo.report}
+        </p>
+      </>
+    ) : (
+      <p>No NGO assigned</p>
+    );
   };
 
   return (
@@ -50,9 +185,9 @@ const JailerDashboard = () => {
             {familyMembers.length === 0 ? (
               <p>No family member data available.</p>
             ) : (
-              familyMembers.map((member, index) => (
-                <div key={index} className="family-member-card">
-                  <h2>{member.name}</h2>
+              familyMembers.map((member) => (
+                <div key={member.id} className="family-member-card">
+                  <h3>{member.name}</h3>
                   <p>
                     <strong>Address:</strong> {member.address}
                   </p>
@@ -60,21 +195,48 @@ const JailerDashboard = () => {
                     <strong>Email:</strong> {member.email}
                   </p>
                   <p>
-                    <strong>Bail Consideration:</strong>{" "}
-                    {member.bail_consideration ? "Yes" : "No"}
-                  </p>
-                  <p>
                     <strong>Phone:</strong> {member.phno}
                   </p>
                   <p>
-                    <strong>Case ID:</strong> {member.case_st_id?.join(", ")}
+                    <strong>Case IDs:</strong> {member.case_st_id?.join(", ")}
                   </p>
                   <p>
-                    <strong>Lawyer ID:</strong> {member.lawyer_id?.join(", ")}
+                    <strong>Lawyer:</strong>{" "}
+                    {member.lawyer_id
+                      ? getLawyerName(member.lawyer_id)
+                      : "No lawyer assigned"}
                   </p>
                   <p>
-                    <strong>NGO ID:</strong> {member.ngo_id?.join(", ")}
+                    <strong>NGO IDs:</strong> {member.ngo_id?.join(", ")}
                   </p>
+
+                  {member.ngo_id?.length === 0 && (
+                    <div className="ngo-dropdown">
+                      <label htmlFor={`ngo-${member.id}`}>Select NGO:</label>
+                      <select
+                        id={`ngo-${member.id}`}
+                        value={selectedNGOs[member.id] || ""}
+                        onChange={(e) =>
+                          handleNGOSelect(member.id, e.target.value)
+                        }
+                        disabled={loading}
+                      >
+                        <option value="">Select an NGO</option>
+                        {ngos.map((ngo) => (
+                          <option key={ngo.id} value={ngo.id}>
+                            {ngo.name} - {ngo.address} (Seats: {ngo.seatno})
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  )}
+
+                  {selectedNGOs[member.id] && (
+                    <div className="selected-ngo-info">
+                      <h4>Selected NGO Details:</h4>
+                      {getNGODetails(selectedNGOs[member.id])}
+                    </div>
+                  )}
                 </div>
               ))
             )}
