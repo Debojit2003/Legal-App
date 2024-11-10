@@ -44,7 +44,7 @@ const FamilyMemberPage = () => {
           <img src={usercase} alt="Case Status" />
           <p>Case Status</p>
         </div>
-        <div className="card rehab-centres">
+        <div className="card rehab-centres" onClick={() => handleNavigation("/ngo-details")}>
           <img src={ngo} alt="Rehabilitation Centre/NGOs" />
           <p>Rehabilitation Centre/NGOs</p>
         </div>
