@@ -8,8 +8,12 @@
   justify-content: flex-end;
   align-items: center;
   padding: 10px 20px;
-  background-color: #f5f5f5;
+  background-color: #f7e7d0;
   border-bottom: 1px solid #ddd;
+  width:100%;
+  max-width:100%;
+  text-align: center;
+  
 }
 
 .home-button {
@@ -21,6 +25,7 @@
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  margin-right: 39%;
 }
 
 .home-button:hover {
@@ -28,9 +33,12 @@
 }
 
 .case-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  display: flex;
   gap: 20px;
+  width:70%;
+  max-width: 100%;
+  margin-right: 40%;
+  
 }
 
 .case-card {
@@ -40,6 +48,7 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
   cursor: pointer;
+  
 }
 
 .case-card:hover {
