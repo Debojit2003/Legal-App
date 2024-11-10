@@ -187,7 +187,7 @@ const JailerDashboard = () => {
             ) : (
               familyMembers.map((member) => (
                 <div key={member.id} className="family-member-card">
-                  <h3>{member.name}</h3>
+                  <h2>{member.name}</h2>
                   <p>
                     <strong>Address:</strong> {member.address}
                   </p>
@@ -212,7 +212,7 @@ const JailerDashboard = () => {
 
                   {member.ngo_id?.length === 0 && (
                     <div className="ngo-dropdown">
-                      <label htmlFor={`ngo-${member.id}`}>Select NGO:</label>
+                      <label htmlFor={`ngo-${member.id}`}><h3>Select NGO:</h3></label>
                       <select
                         id={`ngo-${member.id}`}
                         value={selectedNGOs[member.id] || ""}
