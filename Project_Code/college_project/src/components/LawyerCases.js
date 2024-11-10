@@ -119,9 +119,9 @@ const LawyerCases = () => {
         >
           Home
         </button>
+        <h3>Case Details:</h3>
       </div>
 
-      <h3>Case Details:</h3>
       {caseDetails.length > 0 ? (
         <div className="case-cards">
           {caseDetails.map((caseData, index) => (
