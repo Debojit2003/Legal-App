@@ -23,7 +23,11 @@
 .title {
   font-size: 22px;
   color:#a55e3b;
-  margin-right:40%;
+  margin-right:36%;
+  width:100%;
+  max-width: 100%;
+
+  
 }
 
 .content-section {
@@ -75,7 +79,7 @@
   box-shadow: 0 6px 6px rgba(0, 0, 0, 0.1);
   width: 130%;
   max-width: 170%;
-  margin-left: 123%;
+  margin-left: 110%;
 }
 
 .family-member-card p {
