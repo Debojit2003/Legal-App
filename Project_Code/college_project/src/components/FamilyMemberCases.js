@@ -10,7 +10,7 @@ import {
 } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-import "./LawyerCases.css"; // Import the CSS file
+import "./JailerDashboard.css"; // Import the CSS file
 
 const FamilyMemberCases = () => {
   const [caseDetails, setCaseDetails] = useState([]);
@@ -76,9 +76,9 @@ const FamilyMemberCases = () => {
         >
           Home
         </button>
+        <h3 className="title">Family Member Case Details:</h3>
       </div>
 
-      <h3>Family Member Case Details:</h3>
       {caseDetails.length > 0 ? (
         <div className="case-cards">
           {caseDetails.map((caseData, index) => (
