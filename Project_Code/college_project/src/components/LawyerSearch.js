@@ -29,9 +29,14 @@ const LawyerSearch = () => {
       const user = auth.currentUser;
       const userId = user.uid;
       const lawyerRef = doc(db, 'lawyers', Id);
+      const userRef = doc(db, 'family_member', userId);
 
       await setDoc(lawyerRef, {
         requested_cases: arrayUnion(userId)
+      }, { merge: true });
+
+      await setDoc(userRef, {
+        requested: arrayUnion(Id)
       }, { merge: true });
 
     } catch (error) {
@@ -55,6 +60,7 @@ const LawyerSearch = () => {
         throw new Error('User has no associated cases.');
       }
 
+      const requested = familyMemberData.requested;
       const caseId = familyMemberData.case_st_id[0];
       const caseRef = doc(db, 'cases', caseId);
       const caseDoc = await getDoc(caseRef);
@@ -65,7 +71,11 @@ const LawyerSearch = () => {
       const caseType = caseData.case_type;
       const lawyersQuery = query(collection(db, 'lawyers'), where('type', '==', caseType));
       const lawyersSnapshot = await getDocs(lawyersQuery);
-      const lawyersList = lawyersSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      var lawyersList = lawyersSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+
+      if (requested !== undefined) {
+        lawyersList = lawyersList.filter(lawyer => !requested.includes(lawyer.id));
+      }
 
       setLawyers(lawyersList);
     } catch (error) {
