@@ -9,6 +9,7 @@ import {
   where,
   getDocs,
   updateDoc,
+  arrayRemove
 } from "firebase/firestore";
 import { getAuth } from "firebase/auth"; // Firebase Auth import
 import "./PendingCases.css";
@@ -89,6 +90,10 @@ const PendingCases = () => {
     try {
       const familyMemberRef = doc(db, "family_member", caseId);
       const familyMemberSnap = await getDoc(familyMemberRef);
+
+      await updateDoc(familyMemberRef, {
+        requested: arrayRemove(currentUser.uid)
+      });
 
       if (familyMemberSnap.exists()) {
         const familyMemberData = familyMemberSnap.data();
