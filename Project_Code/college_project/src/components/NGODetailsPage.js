@@ -61,13 +61,13 @@ const NGODetailsPage = () => {
 
   return (
     <div className="ngo-details-container">
-      <h2>NGO Details</h2>
+      <h1>NGO Details</h1>
       <div className="ngo-details-card">
-        <h3>{ngoDetails.name}</h3>
+        <h2>{ngoDetails.name}</h2>
         <p>
           <strong>Address:</strong> {ngoDetails.address}
         </p>
-        <p>
+         <p>
           <strong>Contact Info:</strong> {ngoDetails.contact_info}
         </p>
         <p>
@@ -81,7 +81,7 @@ const NGODetailsPage = () => {
         className="back-button"
         onClick={() => navigate("/family-member")}
       >
-        Back to Dashboard
+        <h2>Back to Dashboard</h2>
       </button>
     </div>
   );
