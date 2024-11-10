@@ -9,7 +9,7 @@ import {
   where,
 } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
-import { useNavigate } from "react-router-dom"; // Import useNavigate hook
+import { useNavigate } from "react-router-dom";
 import "./LawyerCases.css"; // Import the CSS file
 
 const LawyerCases = () => {
@@ -26,10 +26,42 @@ const LawyerCases = () => {
         const lawyerDoc = await getDoc(doc(db, "lawyers", user.uid));
         if (lawyerDoc.exists()) {
           const lawyerData = lawyerDoc.data();
-          const caseIds = [...lawyerData.present_case, ...lawyerData.past_case];
+          const presentCaseIds = lawyerData.present_case || [];
+          const pastCaseIds = lawyerData.past_case || [];
 
-          if (caseIds.length > 0) {
-            await fetchCaseDetails(caseIds);
+          // Log to check if present_case and past_case arrays are correct
+          console.log("Present Case IDs:", presentCaseIds);
+          console.log("Past Case IDs:", pastCaseIds);
+
+          // Get family members associated with this lawyer
+          const familyMemberQuery = query(
+            collection(db, "family_member"),
+            where("lawyer_id", "array-contains", user.uid) // Ensure the lawyer is associated with the family member
+          );
+          const familyMembersSnapshot = await getDocs(familyMemberQuery);
+          const familyMemberCaseIds = [];
+          familyMembersSnapshot.forEach((doc) => {
+            const familyMemberData = doc.data();
+            if (familyMemberData.case_st_id) {
+              familyMemberCaseIds.push(...familyMemberData.case_st_id);
+            }
+          });
+
+          // Log family member case IDs
+          console.log("Family Member Case IDs:", familyMemberCaseIds);
+
+          // Combine case IDs from present_case, past_case, and family_member's case_st_id
+          const allCaseIds = [
+            ...presentCaseIds,
+            ...pastCaseIds,
+            ...familyMemberCaseIds,
+          ];
+
+          console.log("Combined Case IDs:", allCaseIds); // Log combined case IDs
+
+          if (allCaseIds.length > 0) {
+            // Fetch case details for the combined case IDs
+            await fetchCaseDetails(allCaseIds);
           } else {
             setLoading(false); // No cases, set loading to false
           }
@@ -40,41 +72,56 @@ const LawyerCases = () => {
     fetchLawyerData();
   }, [auth, db]);
 
-  const fetchCaseDetails = async (caseIds) => {
+  const fetchCaseDetails = async (allCaseIds) => {
     const casesQuery = query(
       collection(db, "cases"),
-      where("case_id", "in", caseIds)
+      where("case_id", "in", allCaseIds)
     );
-    const querySnapshot = await getDocs(casesQuery);
 
-    const fetchedCaseDetails = querySnapshot.docs.map((doc) => doc.data());
-    setCaseDetails(fetchedCaseDetails);
-    setLoading(false); // Done loading data
+    try {
+      const querySnapshot = await getDocs(casesQuery);
+
+      // Check if any cases were found
+      if (!querySnapshot.empty) {
+        const fetchedCaseDetails = querySnapshot.docs.map((doc) => doc.data());
+        console.log("Fetched Case Details:", fetchedCaseDetails); // Log case details to ensure data is fetched
+        setCaseDetails(fetchedCaseDetails);
+      } else {
+        console.log("No cases found with these IDs.");
+        setCaseDetails([]); // Set empty array if no cases are found
+      }
+      setLoading(false); // Done loading data
+    } catch (error) {
+      console.error("Error fetching case details:", error);
+      setLoading(false);
+    }
   };
 
   const handleHomeClick = () => {
     navigate("/"); // Navigate to the home page
   };
 
-  if (loading) {
-    return <div>Loading case details...</div>;
-  }
   const handleNavigation = (path) => {
     navigate(path);
   };
+
+  if (loading) {
+    return <div>Loading case details...</div>;
+  }
+
   return (
     <div className="case-container">
       {/* Top bar with Home button */}
       <div className="top-bar">
         <button
           className="home-button"
-          onClick={() => handleNavigation("/lawyer")}>
+          onClick={() => handleNavigation("/lawyer")}
+        >
           Home
         </button>
-        <h2 className="casetitle">Case Details:</h2>
       </div>
 
-      
+      <h3>Case Details:</h3>
       {caseDetails.length > 0 ? (
         <div className="case-cards">
           {caseDetails.map((caseData, index) => (
@@ -99,3 +146,4 @@ const LawyerCases = () => {
 };
 
 export default LawyerCases;
+
