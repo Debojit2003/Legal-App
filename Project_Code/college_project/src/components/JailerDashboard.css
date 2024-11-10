@@ -21,9 +21,9 @@
 }
 
 .title {
-  font-size: 22px;
+  font-size: 24px;
   color:#a55e3b;
-  margin-right:36%;
+  margin-left:36%;
   width:100%;
   max-width: 100%;
 
@@ -77,9 +77,9 @@
   padding: 15px;
   margin-bottom: 10px;
   box-shadow: 0 6px 6px rgba(0, 0, 0, 0.1);
-  width: 130%;
+  width: 100%;
   max-width: 170%;
-  margin-left: 110%;
+  margin-left: 87%;
 }
 
 .family-member-card p {
@@ -112,3 +112,5 @@
 .home-button:hover {
   background-color: #34495e;
 }
+
+
