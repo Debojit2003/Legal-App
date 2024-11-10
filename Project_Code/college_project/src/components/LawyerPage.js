@@ -39,7 +39,10 @@ const LawyerPage = () => {
       </header>
 
       <div className="content-section">
-        <div className="card pending-appointments">
+        <div
+          className="card pending-appointments"
+          onClick={() => handleNavigation("/pending-case")}
+        >
           <img src={email} alt="Pending Appointments" />
           <p>Pending Appointments</p>
         </div>
