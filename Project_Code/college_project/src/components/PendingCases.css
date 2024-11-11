@@ -1,145 +1,161 @@
-/* PendingCases.css */
-
+/* Container for the pending cases */
 .pending-cases-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding: 20px;
+  background-color: #fbe2cc; /* Soft background color */
+  min-height: 100vh;
 }
 
+/* Title styling */
+.pending-cases-container h2 {
+  font-size: 2rem;
+  color: #5a3e2b;
+  margin-bottom: 20px;
+}
+
+/* Home Button styling */
 .home-button {
-  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   background-color: #007bff;
   color: white;
   padding: 10px 20px;
-  border-radius: 5px;
-  font-size: 16px;
-  width: max-content;
-  margin: 20px auto;
-  text-align: center;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  transition: background-color 0.3s;
+  margin-left: 2%;
 }
 
 .home-button:hover {
   background-color: #0056b3;
 }
 
+/* Container for cards */
 .cards-container {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 800px;
   gap: 20px;
-  justify-content: center;
 }
 
+/* Styling for each individual case card */
 .case-card {
-  border: 1px solid #ccc;
+  background-color: #fdf3e7; /* Light background color for cards */
   padding: 20px;
-  margin-bottom: 20px;
-  border-radius: 8px;
-  background-color: #f9f9f9;
-  width: 250px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Subtle shadow for depth */
+  width: 100%;
+  max-width: 700px;
+  text-align: left;
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 
+.case-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Styling for the text content in the case card */
 .case-card p {
   margin: 8px 0;
+  font-size: 1.1rem;
+  color: #555;
+  line-height: 1.5;
 }
 
+.case-card strong {
+  font-size: 1.3rem;
+  color: #333;
+}
+
+/* Case Status Details header */
+.case-card h4 {
+  margin-top: 15px;
+  font-size: 1.3rem;
+  color: #000000;
+  font-weight: bold;
+}
+
+/* Action buttons styling */
 .action-buttons {
   display: flex;
-  gap: 10px;
+  justify-content: space-between;
+  margin-top: 20px;
 }
 
-.accept-button,
-.reject-button {
-  padding: 8px 16px;
+.accept-button, .reject-button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 8px;
   border: none;
-  border-radius: 5px;
   cursor: pointer;
-  color: white;
-  font-size: 14px;
+  transition: background-color 0.3s;
 }
 
 .accept-button {
-  background-color: green;
+  background-color: #28a745; /* Green for accept */
+  color: white;
 }
 
 .accept-button:hover {
-  background-color: darkgreen;
+  background-color: #218838;
 }
 
 .reject-button {
-  background-color: red;
+  background-color: #dc3545; /* Red for reject */
+  color: white;
 }
 
 .reject-button:hover {
-  background-color: darkred;
+  background-color: #c82333;
 }
 
-/* Popup Styles */
-.popup-overlay {
+/* Popup styling */
+.popup {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  right: 0;
+  bottom: 0;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: rgba(0, 0, 0, 0.5); /* Dark overlay */
+  z-index: 1000;
 }
 
 .popup-content {
-  background-color: white;
+  background-color: #fff;
   padding: 20px;
   border-radius: 8px;
   text-align: center;
-  max-width: 400px;
-  width: 90%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.popup-content h3 {
+  margin-bottom: 15px;
+  font-size: 1.5rem;
+  color: #5a3e2b;
 }
 
 .popup-content button {
-  margin-top: 10px;
   padding: 10px 20px;
-  border: none;
-  background-color: #4caf50;
+  font-size: 1rem;
+  border-radius: 8px;
+  background-color: #007bff;
   color: white;
   cursor: pointer;
-  border-radius: 5px;
+  transition: background-color 0.3s;
+  border: none;
 }
 
 .popup-content button:hover {
-  background-color: #45a049;
-}
-
-/* Modal Styles */
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.modal-content {
-  background-color: white;
-  padding: 20px;
-  text-align: center;
-  border-radius: 5px;
-  width: 80%;
-  max-width: 400px;
-}
-
-.modal button {
-  margin-top: 10px;
-  padding: 10px;
-  border: none;
-  background-color: #4caf50;
-  color: white;
-  cursor: pointer;
-  border-radius: 5px;
-}
-
-.modal button:hover {
-  background-color: #45a049;
+  background-color: #0056b3;
 }
