@@ -1,149 +1,227 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   getFirestore,
   doc,
   getDoc,
   collection,
-  getDocs,
   query,
   where,
+  getDocs,
+  updateDoc,
 } from "firebase/firestore";
-import { getAuth } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
-import "./LawyerCases.css"; // Import the CSS file
+import { getAuth } from "firebase/auth"; // Firebase Auth import
+import axios from "axios"; // Import axios for Cloudinary upload
+import "./PendingCases.css";
 
-const LawyerCases = () => {
+const PendingCases = () => {
+  const [requestedCases, setRequestedCases] = useState([]);
   const [caseDetails, setCaseDetails] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const auth = getAuth();
+  const [showPopup, setShowPopup] = useState(false); // State for showing popup
+  const [file, setFile] = useState(null); // State to hold the file
+  const [uploading, setUploading] = useState(false); // State for file upload status
   const db = getFirestore();
-  const navigate = useNavigate(); // Initialize useNavigate hook
+  const navigate = useNavigate();
+  const auth = getAuth();
+  const currentUser = auth.currentUser;
 
   useEffect(() => {
-    const fetchLawyerData = async () => {
-      const user = auth.currentUser;
-      if (user) {
-        const lawyerDoc = await getDoc(doc(db, "lawyers", user.uid));
-        if (lawyerDoc.exists()) {
-          const lawyerData = lawyerDoc.data();
-          const presentCaseIds = lawyerData.present_case || [];
-          const pastCaseIds = lawyerData.past_case || [];
+    const fetchRequestedCases = async () => {
+      if (currentUser) {
+        try {
+          const lawyerDocRef = doc(db, "lawyers", currentUser.uid);
+          const lawyerDocSnap = await getDoc(lawyerDocRef);
 
-          // Log to check if present_case and past_case arrays are correct
-          console.log("Present Case IDs:", presentCaseIds);
-          console.log("Past Case IDs:", pastCaseIds);
+          if (lawyerDocSnap.exists()) {
+            const lawyerData = lawyerDocSnap.data();
+            const requestedCaseIds = lawyerData.requested_cases || [];
 
-          // Get family members associated with this lawyer
-          const familyMemberQuery = query(
-            collection(db, "family_member"),
-            where("lawyer_id", "array-contains", user.uid) // Ensure the lawyer is associated with the family member
-          );
-          const familyMembersSnapshot = await getDocs(familyMemberQuery);
-          const familyMemberCaseIds = [];
-          familyMembersSnapshot.forEach((doc) => {
-            const familyMemberData = doc.data();
-            if (familyMemberData.case_st_id) {
-              familyMemberCaseIds.push(...familyMemberData.case_st_id);
+            const familyMemberCollection = collection(db, "family_member");
+            const caseQuery = query(
+              familyMemberCollection,
+              where("id", "in", requestedCaseIds)
+            );
+            const caseQuerySnapshot = await getDocs(caseQuery);
+
+            const cases = caseQuerySnapshot.docs.map((doc) => ({
+              id: doc.id,
+              ...doc.data(),
+            }));
+            setRequestedCases(cases);
+
+            const allCaseIds = cases.flatMap((caseItem) => caseItem.case_st_id);
+            if (allCaseIds.length > 0) {
+              const casesCollection = collection(db, "cases");
+              const casesQuery = query(
+                casesCollection,
+                where("case_id", "in", allCaseIds)
+              );
+              const casesSnapshot = await getDocs(casesQuery);
+
+              const casesData = casesSnapshot.docs.map((doc) => ({
+                id: doc.id,
+                ...doc.data(),
+              }));
+              setCaseDetails(casesData);
             }
-          });
-
-          // Log family member case IDs
-          console.log("Family Member Case IDs:", familyMemberCaseIds);
-
-          // Combine case IDs from present_case, past_case, and family_member's case_st_id
-          const allCaseIds = [
-            ...presentCaseIds,
-            ...pastCaseIds,
-            ...familyMemberCaseIds,
-          ];
-
-          console.log("Combined Case IDs:", allCaseIds); // Log combined case IDs
-
-          if (allCaseIds.length > 0) {
-            // Fetch case details for the combined case IDs
-            await fetchCaseDetails(allCaseIds);
           } else {
-            setLoading(false); // No cases, set loading to false
+            console.error("No lawyer document found!");
           }
+        } catch (error) {
+          console.error("Error fetching requested cases:", error);
         }
+      } else {
+        console.log("No user is logged in.");
       }
     };
 
-    fetchLawyerData();
-  }, [auth, db]);
+    fetchRequestedCases();
+  }, [currentUser, db]);
 
-  const fetchCaseDetails = async (allCaseIds) => {
-    const casesQuery = query(
-      collection(db, "cases"),
-      where("case_id", "in", allCaseIds)
-    );
+  const handleHomeClick = () => {
+    navigate("/lawyer");
+  };
+
+  const handleFileChange = (e) => {
+    setFile(e.target.files[0]); // Capture the file selected by the user
+  };
+
+  const handleFileUpload = async (familyMemberId, action) => {
+    if (!file) {
+      console.error("No file selected!");
+      return;
+    }
+
+    setUploading(true);
+
+    // Create form data for Cloudinary upload
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", "sdhgimkh"); // Replace with your Cloudinary upload preset
 
     try {
-      const querySnapshot = await getDocs(casesQuery);
+      // Upload file to Cloudinary
+      const res = await axios.post(
+        "https://api.cloudinary.com/v1_1/dapyza9xq/image/upload", // Replace with your Cloudinary cloud name
+        formData
+      );
 
-      // Check if any cases were found
-      if (!querySnapshot.empty) {
-        const fetchedCaseDetails = querySnapshot.docs.map((doc) => doc.data());
-        console.log("Fetched Case Details:", fetchedCaseDetails); // Log case details to ensure data is fetched
-        setCaseDetails(fetchedCaseDetails);
+      const uploadedUrl = res.data.secure_url; // Get the URL of the uploaded file
+      console.log("File uploaded successfully:", uploadedUrl);
+
+      // Now, update Firestore with the URL to the family_member document
+      const familyMemberRef = doc(db, "family_member", familyMemberId);
+      const familyMemberSnap = await getDoc(familyMemberRef);
+
+      if (familyMemberSnap.exists()) {
+        const familyMemberData = familyMemberSnap.data();
+        const updatedCases =
+          action === "accept"
+            ? [...(familyMemberData.accepted_cases || []), uploadedUrl]
+            : [...(familyMemberData.rejected_cases || []), uploadedUrl];
+
+        // Update the family_member's document with the new URL
+        await updateDoc(familyMemberRef, {
+          [action === "accept" ? "accepted_cases" : "rejected_cases"]:
+            updatedCases,
+        });
+
+        console.log(`File URL added to ${action}ed cases.`);
+
+        // Show popup after successful upload
+        setShowPopup(true);
+        setUploading(false);
+
+        // Close popup and navigate to /lawyer page after 3 seconds
+        setTimeout(() => {
+          setShowPopup(false);
+          navigate("/lawyer");
+        }, 3000); // Popup will be shown for 3 seconds
       } else {
-        console.log("No cases found with these IDs.");
-        setCaseDetails([]); // Set empty array if no cases are found
+        console.error("Family member document not found.");
+        setUploading(false);
       }
-      setLoading(false); // Done loading data
     } catch (error) {
-      console.error("Error fetching case details:", error);
-      setLoading(false);
+      console.error("Error uploading file:", error);
+      setUploading(false);
     }
   };
 
-  const handleHomeClick = () => {
-    navigate("/"); // Navigate to the home page
-  };
-
-  const handleNavigation = (path) => {
-    navigate(path);
-  };
-
-  if (loading) {
-    return <div>Loading case details...</div>;
-  }
-
   return (
-    <div className="case-container">
-      {/* Top bar with Home button */}
-      <div className="top-bar">
-        <button
-          className="home-button"
-          onClick={() => handleNavigation("/lawyer")}
-        >
-          Home
-        </button>
-        <h1>Case Details:</h1>
+    <div className="pending-cases-container">
+      <h2>Requested Cases</h2>
+
+      <div className="home-button" onClick={handleHomeClick}>
+        <p>Home</p>
       </div>
 
-      {caseDetails.length > 0 ? (
-        <div className="case-cards">
-          {caseDetails.map((caseData, index) => (
-            <div key={index} className="case-card">
+      <div className="cards-container">
+        {requestedCases.length > 0 ? (
+          requestedCases.map((caseItem) => (
+            <div className="case-card" key={caseItem.id}>
               <p>
-                <strong>Case ID:</strong> {caseData.case_id}
+                <strong>Name:</strong> {caseItem.name}
               </p>
               <p>
-                <strong>Case Detail:</strong> {caseData.case_detail}
+                <strong>Email:</strong> {caseItem.email}
               </p>
               <p>
-                <strong>Case Type:</strong> {caseData.case_type}
+                <strong>Phone:</strong> {caseItem.phno}
               </p>
+
+              <div>
+                <h4>Case Status Details:</h4>
+                {caseItem.case_st_id.map((caseId) => {
+                  const caseDetail = caseDetails.find(
+                    (c) => c.case_id === caseId
+                  );
+                  return caseDetail ? (
+                    <div key={caseDetail.id}>
+                      <p>
+                        <strong>Case ID:</strong> {caseDetail.case_id}
+                      </p>
+                      <p>
+                        <strong>Case Type:</strong> {caseDetail.case_type}
+                      </p>
+                      <p>
+                        <strong>Case Detail:</strong> {caseDetail.case_detail}
+                      </p>
+                    </div>
+                  ) : (
+                    <p>No case details available for {caseId}</p>
+                  );
+                })}
+              </div>
+
+              <div className="action-buttons">
+                <input
+                  type="file"
+                  onChange={handleFileChange}
+                  disabled={uploading}
+                />
+                <button
+                  className="Bail-Paper"
+                  onClick={() => handleFileUpload(caseItem.id, "accept")}
+                  disabled={uploading}
+                >
+                  {uploading ? "Uploading..." : "Upload Bail Paper"}
+                </button>
+              </div>
             </div>
-          ))}
+          ))
+        ) : (
+          <p>No requested cases found.</p>
+        )}
+      </div>
+
+      {/* Popup for Case Acceptance */}
+      {showPopup && (
+        <div className="popup">
+          <p>Bail Paper uploaded successfully!</p>
         </div>
-      ) : (
-        <p>No case details available</p>
       )}
     </div>
   );
 };
 
-export default LawyerCases;
-
+export default PendingCases;
