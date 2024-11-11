@@ -10,7 +10,7 @@ import {
 } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-import "./JailerDashboard.css"; // Import the CSS file
+import "./LawyerCases.css"; // Import the CSS file
 
 const FamilyMemberCases = () => {
   const [caseDetails, setCaseDetails] = useState([]);
