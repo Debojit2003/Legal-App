@@ -119,7 +119,7 @@ const LawyerCases = () => {
         >
           Home
         </button>
-        <h3>Case Details:</h3>
+        <h1>Case Details:</h1>
       </div>
 
       {caseDetails.length > 0 ? (
