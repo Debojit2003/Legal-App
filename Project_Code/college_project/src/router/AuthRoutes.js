@@ -18,6 +18,8 @@ import NGODetailsPage from "../components/NGODetailsPage.js";
 import PendingCases from "../components/PendingCases.js";
 import FileUpload from "../components/FileUpload.js";
 import BailConsider from "../components/BailConsider.js";
+import FMForm from "../components/FamilyMemberDetailsForm.js"
+import LForm from "../components/LawyerDetailsForm.js"
 //mport NGODetailsPage from "../components/NGODetailsPage.js";
 const AuthRoutes = () => {
   return (
@@ -41,6 +43,8 @@ const AuthRoutes = () => {
         <Route path="/pending-case" element={<PendingCases />} />
         <Route path="/upload-file" element={<FileUpload />} />
         <Route path="/bail-page" element={<BailConsider />} />
+        <Route path="/fmform" element={<FMForm />} />
+        <Route path="/lawyerform" element={<LForm />} />
       </Routes>
     </Router>
   );
