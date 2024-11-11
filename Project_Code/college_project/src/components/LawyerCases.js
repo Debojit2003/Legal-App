@@ -149,7 +149,7 @@ const PendingCases = () => {
 
   return (
     <div className="pending-cases-container">
-      <h2>Requested Cases</h2>
+      <h2>Case Record</h2>
 
       <div className="home-button" onClick={handleHomeClick}>
         <p>Home</p>
