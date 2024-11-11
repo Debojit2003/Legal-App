@@ -72,10 +72,10 @@ const SignupPage = () => {
           //alert('Login successful!');
           switch (userRole) {
             case "Family-Member":
-              navigate("/family-member");
+              navigate("/fmform");
               break;
             case "Lawyer":
-              navigate("/lawyer");
+              navigate("/lawyerform");
               break;
             case "Jail-Authority":
               navigate("/jail-authority");
