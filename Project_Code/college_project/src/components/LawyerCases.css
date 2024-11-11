@@ -4,12 +4,12 @@
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background-color: #fbe2cc; /* Background color of the container */
+  background-color: #f4dcc8; /* Background color of the container */
   padding: 20px;
 }
 
 .top-bar-card {
-  background-color: white;
+  background-color:#f7e7d0;
   padding: 15px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -29,6 +29,7 @@
   position: relative;
 }
 
+
 .home-button {
   background-color: #007bff;
   color: white;
@@ -40,11 +41,13 @@
   left: 0;
 }
 
-h3 {
+.top-bar h1 {
   flex-grow: 1;
   text-align: center;
   margin: 0;
   font-weight: bold;
+  font-size: 1.2rem;
+  color: #a55e3b;
 }
 
 
@@ -54,13 +57,13 @@ h3 {
   gap: 20px;
   flex-wrap: wrap;
   justify-content: center;
-  max-width: 1200px;
+  max-width: 100%;
   width: 100%;
   margin-top:1%;
 }
 
 .case-card {
-  background-color: white;
+  background-color: #f4dcc8;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
