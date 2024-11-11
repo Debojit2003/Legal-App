@@ -41,7 +41,10 @@ const JailAuthorityPage = () => {
           <p>Dashboard</p>
         </div>
 
-        <div className="card bail-consideration">
+        <div
+          className="card bail-consideration"
+          onClick={() => handleNavigation("/bail-page")}
+        >
           <img src={bail} alt="Bail Consideration" />
 
           <p>Bail Consideration Application</p>
