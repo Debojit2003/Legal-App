@@ -1,0 +1,44 @@
+.file-upload-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  background-color: #ffeb3b; /* Background color as per your screenshot */
+}
+
+.file-upload-title {
+  margin-bottom: 10px; /* Reduce the gap here */
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.file-upload {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed #ccc;
+  padding: 20px;
+  width: 300px;
+  height: 200px;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
+
+.file-upload:hover {
+  border-color: #333;
+}
+
+.file-upload input[type="file"] {
+  display: none;
+}
+
+.file-upload span {
+  margin-top: 10px;
+  font-size: 16px;
+  color: #888;
+}
+.error-message {
+  color: red;
+  font-size: 14px;
+}
