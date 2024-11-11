@@ -16,8 +16,8 @@ import LawyerSearch from "../components/LawyerSearch";
 import FamilyCase from "../components/FamilyMemberCases.js";
 import NGODetailsPage from "../components/NGODetailsPage.js";
 import PendingCases from "../components/PendingCases.js";
-import FMForm from "../components/FamilyMemberDetailsForm.js"
-import LForm from "../components/LawyerDetailsForm.js"
+import FileUpload from "../components/FileUpload.js";
+import BailConsider from "../components/BailConsider.js";
 //mport NGODetailsPage from "../components/NGODetailsPage.js";
 const AuthRoutes = () => {
   return (
@@ -39,8 +39,8 @@ const AuthRoutes = () => {
         <Route path="/family-case" element={<FamilyCase />} />
         <Route path="/ngo-details" element={<NGODetailsPage />} />
         <Route path="/pending-case" element={<PendingCases />} />
-        <Route path="/fmform" element={<FMForm />} />
-        <Route path="/lawyerform" element={<LForm />} />
+        <Route path="/upload-file" element={<FileUpload />} />
+        <Route path="/bail-page" element={<BailConsider />} />
       </Routes>
     </Router>
   );
