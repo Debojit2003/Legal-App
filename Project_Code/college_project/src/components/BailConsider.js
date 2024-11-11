@@ -179,9 +179,7 @@ const BailConsider = () => {
                     >
                       Bail-Accept
                     </button>
-                    <button onClick={() => handleReject(member.id)}>
-                      Bail-Reject
-                    </button>
+
                   </div>
                 </div>
               ))
