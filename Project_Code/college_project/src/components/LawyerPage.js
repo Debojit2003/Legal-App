@@ -9,7 +9,7 @@ import user from "../assets/images/user.png";
 import about from "../assets/images/about.png";
 import setting from "../assets/images/settings.png";
 import LanguageSelector from "./LanguageSelector";
-
+import Chatbot from "./Chatbot";
 const LawyerPage = () => {
   const [showSettings, setShowSettings] = useState(false);
   const navigate = useNavigate();
@@ -55,10 +55,10 @@ const LawyerPage = () => {
           <p>Current case status</p>
         </div>
 
-        <div className="card chatbot">
+        {/* <div className="card chatbot">
           <img src={chatbot} alt="Chatbot" />
           <p>Chatbot</p>
-        </div>
+        </div> */}
       </div>
 
       <nav className="bottom-nav">
@@ -85,6 +85,9 @@ const LawyerPage = () => {
           )}
         </div>
       </nav>
+      <div className="chatbot-container">
+        <Chatbot />
+      </div>
     </div>
   );
 };
