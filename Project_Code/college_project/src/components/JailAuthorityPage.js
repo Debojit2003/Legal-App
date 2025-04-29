@@ -9,6 +9,7 @@ import user from "../assets/images/user.png";
 import about from "../assets/images/about.png";
 import setting from "../assets/images/settings.png";
 import LanguageSelector from "./LanguageSelector";
+import Chatbot from "./Chatbot";
 const JailAuthorityPage = () => {
   const [showSettingsPopup, setShowSettingsPopup] = useState(false);
   const navigate = useNavigate();
@@ -50,10 +51,10 @@ const JailAuthorityPage = () => {
           <p>Bail Consideration Application</p>
         </div>
 
-        <div className="card chatbot">
+        {/* <div className="card chatbot">
           <img src={chatbot} alt="Chatbot" />
           <p>Chatbot</p>
-        </div>
+        </div> */}
       </div>
 
       <nav className="bottom-nav">
@@ -88,6 +89,9 @@ const JailAuthorityPage = () => {
           )}
         </div>
       </nav>
+      <div className="chatbot-container">
+        <Chatbot />
+      </div>
     </div>
   );
 };
