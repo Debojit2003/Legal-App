@@ -1,146 +1,44 @@
-/* General Container */
-.family-container {
+.file-upload-container {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  align-items: center;
   height: 100vh;
-  background-color: #f4dcc8;
-  padding: 10px;
-  align-items: center;
+  background-color: #ffeb3b; /* Background color as per your screenshot */
 }
 
-/* Header Section */
-.family-header {
-  width: 100%;
-  max-width: 500px; /* Consistent width */
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px;
-  background-color: #f7e7d0;
-  border-radius: 15px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  margin-bottom: 10px;
-}
-
-.title {
-  font-size: 22px;
-  color: #a55e3b;
+.file-upload-title {
+  margin-bottom: 10px; /* Reduce the gap here */
+  font-size: 24px;
   font-weight: bold;
-  margin: 0px 0px 5px;
 }
 
-.header-icons {
-  display: flex;
-  gap: 10px;
-}
-
-.menu-icon,
-.language-icon {
-  font-size: 22px;
-  cursor: pointer;
-  transition: transform 0.2s ease-in-out;
-}
-
-.menu-icon:hover,
-.language-icon:hover {
-  transform: scale(1.1);
-}
-
-/* Content Section */
-.content-section {
-  flex-grow: 1;
+.file-upload {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-  gap: 15px;
-  margin: 10px 0;
-}
-
-.card {
-  background-color: #f7e7d0;
-  border-radius: 12px;
-  padding: 15px;
-  text-align: center;
-  position: relative;
-  transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out;
-  flex-grow: 1;
-}
-
-.card img {
-  width: 35px;
-  margin-bottom: 8px;
-}
-
-.card p {
-  font-size: 10px;
-  font-weight: 600;
-  color: #533a2d;
-}
-
-.card:hover {
-  transform: translateY(-3px);
-  background-color: #e0d3b8;
-}
-
-/* Bottom Navigation */
-.bottom-nav {
-  display: flex;
-  justify-content: space-between;
-  background-color: #f7e7d0;
-  padding: 8px 15px;
-  border-radius: 15px;
-}
-
-.nav-item {
-  text-align: center;
-  position: relative;
-  transition: transform 0.2s ease-in-out;
-}
-
-.nav-item img {
-  width: 28px;
-}
-
-.nav-item p {
-  margin: 3px 0 0;
-  font-size: 12px;
-  color: #533a2d;
-}
-
-.nav-item:hover {
-  transform: translateY(-3px);
-}
-
-.settings-popup {
-  position: absolute;
-  bottom: 50px;
-  right: 25px;
-  background-color: white;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 6px;
-  padding: 6px;
-  z-index: 100;
-  width: 120px;
-}
-
-.settings-popup p {
-  cursor: pointer;
-  padding: 10px;
-  margin: 0;
-}
-
-.settings-popup p:hover {
-  background-color: #e63939;
-}
-
-.chatbot-container {
-  bottom: 20px;
-  right: 20px;
-  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed #ccc;
+  padding: 20px;
   width: 300px;
-  height: 400px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  border-radius: 10px;
-  overflow: hidden;
+  height: 200px;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
+
+.file-upload:hover {
+  border-color: #333;
+}
+
+.file-upload input[type="file"] {
+  display: none;
+}
+
+.file-upload span {
+  margin-top: 10px;
+  font-size: 16px;
+  color: #888;
+}
+.error-message {
+  color: red;
+  font-size: 14px;
 }
