@@ -10,8 +10,8 @@
 
 /* Header Section */
 .jail-header {
-  width: 100%;
-  max-width: 500px; /* Consistent width */
+  width: 608px;
+  max-width: 100%; /* Consistent width */
   display: flex;
   justify-content: space-between;
   align-items: center;
