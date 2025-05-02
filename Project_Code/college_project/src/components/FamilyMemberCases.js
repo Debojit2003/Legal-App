@@ -10,7 +10,7 @@ import {
 } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-import "./LawyerCases.css"; // Import the CSS file
+import "./FamilyMemberCases.css"; // Import the CSS file
 
 const FamilyMemberCases = () => {
   const [caseDetails, setCaseDetails] = useState([]);
@@ -67,11 +67,11 @@ const FamilyMemberCases = () => {
   }
 
   return (
-    <div className="case-container">
+    <div className="family1-case-container">
       {/* Top bar with Home button */}
       <div className="top-bar">
         <button
-          className="home-button"
+          className="home-button1"
           onClick={() => handleNavigation("/family-member")}
         >
           Home
