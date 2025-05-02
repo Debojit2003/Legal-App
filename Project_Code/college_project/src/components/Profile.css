@@ -10,8 +10,8 @@
   
   /* Header Section */
   .profile-header {
-    width: 100%;
-    max-width: 500px; /* Consistent width */
+    width: 608px;
+    max-width: 100%; /* Consistent width */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -62,19 +62,19 @@
     flex-direction: column;
     align-items:center;
     background-color: #f7e7d0;
-    width: 100%;
+    width: 608px;
     max-width: 100%;
     padding: 10px;
     border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     text-align: center;
-    
+    margin-bottom: 15px;
 }
 
 .card h1 {
     font-size: 2.5em;
     color: #333;
-    margin-left: 37%;
+    margin-left: 39%;
     align-self: flex-start;
 }
 
@@ -108,6 +108,8 @@
     background-color: #f7e7d0;
     padding: 10px 20px;
     border-radius: 20px;
+    width: 608px;
+    max-width: 100%;
   }
   
   .nav-item {
