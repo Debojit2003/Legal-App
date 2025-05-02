@@ -10,14 +10,25 @@
 
 /* Title styling */
 .pending-cases-container h2 {
-  font-size: 2rem;
+  /* font-size: 2rem;
   color: #5a3e2b;
+  margin-bottom: 20px; */
+  width: 608px;
+  max-width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  background-color: #f7e7d0;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
+  position: relative;
 }
 
 /* Home Button styling */
 .home-button {
-  display: inline-flex;
+  /* display: inline-flex;
   align-items: center;
   justify-content: center;
   background-color: #007bff;
@@ -28,11 +39,23 @@
   cursor: pointer;
   margin-bottom: 20px;
   transition: background-color 0.3s;
-  margin-left: 2%;
+  margin-left: 2%; */
+  background-color: #007bff;
+  color: white;
+  padding: 8px 16px;
+  text-decoration: none;
+  font-size: 1rem;
+  border-radius: 8px;
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  transition: background-color 0.3s;
+  
 }
 
+
 .home-button:hover {
-  background-color: #0056b3;
+  background-color: #34495e;
 }
 
 /* Container for cards */
@@ -47,12 +70,12 @@
 
 /* Styling for each individual case card */
 .case-card {
-  background-color: #fdf3e7; /* Light background color for cards */
+  background-color: #f7e7d0; 
   padding: 20px;
   border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Subtle shadow for depth */
-  width: 100%;
-  max-width: 700px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); 
+  width: 608px;
+  max-width: 100%;
   text-align: left;
   transition: transform 0.3s, box-shadow 0.3s;
 }
