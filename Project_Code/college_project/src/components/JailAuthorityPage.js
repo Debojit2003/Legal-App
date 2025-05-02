@@ -89,9 +89,9 @@ const JailAuthorityPage = () => {
           )}
         </div>
       </nav>
-      <div className="chatbot-container">
-        <Chatbot />
-      </div>
+      
+      <Chatbot />
+      
     </div>
   );
 };
