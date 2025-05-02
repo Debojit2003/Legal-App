@@ -81,7 +81,7 @@ const NGODetailsPage = () => {
         className="back-button"
         onClick={() => navigate("/family-member")}
       >
-        <h2>Back to Dashboard</h2>
+        <h2>Back to Home</h2>
       </button>
     </div>
   );
