@@ -107,10 +107,9 @@ const FamilyMemberPage = () => {
         </div>
       </nav>
 
-      {/* Add the Chatbot component */}
-      <div className="chatbot-container">
-        <Chatbot />
-      </div>
+      
+      <Chatbot />
+      
     </div>
   );
 };
