@@ -9,7 +9,8 @@ import {
 } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import emailjs from "emailjs-com";
-import "./BailConsider.css";
+import "./JailerDashboard.css";
+
 
 const BailConsider = () => {
   const [familyMembers, setFamilyMembers] = useState([]);
@@ -124,7 +125,7 @@ const BailConsider = () => {
   };
 
   return (
-    <div className="bail-consider-container">
+    <div className="jailer-dashboard-container">
       <header className="header">
         <button className="home-button" onClick={handleHomeClick}>
           Home
