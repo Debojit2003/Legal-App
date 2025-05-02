@@ -12,7 +12,7 @@ import {
 } from "firebase/firestore";
 import { getAuth } from "firebase/auth"; // Firebase Auth import
 import axios from "axios"; // Import axios for Cloudinary upload
-import "./PendingCases.css";
+import "./LawyerCases.css";
 
 const PendingCases = () => {
   const [requestedCases, setRequestedCases] = useState([]);
@@ -148,10 +148,10 @@ const PendingCases = () => {
   };
 
   return (
-    <div className="pending-cases-container">
+    <div className="case-container">
       <h2>Case Record</h2>
 
-      <div className="home-button" onClick={handleHomeClick}>
+      <div className="home-buttonlc" onClick={handleHomeClick}>
         <p>Home</p>
       </div>
 
