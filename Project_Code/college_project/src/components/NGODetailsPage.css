@@ -2,16 +2,23 @@
 
 .ngo-details-container {
   
-  font-family: Arial, sans-serif;
+  /* font-family: Arial, sans-serif;
   height: 100%;
   max-height: 100%;
   background-color: #f4dcc8;
   padding: 10px;
   text-align: center;
   font-size: 18px;
+  align-items: center; */
+  font-family: Arial, sans-serif;
+  min-height: 100vh;
+  background-color: #f4dcc8;
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  
-  
+  padding: 20px 10px;
+  box-sizing: border-box;
+    
 }
 .ngo-details-page {
   font-family: Arial, sans-serif;
@@ -27,7 +34,7 @@
 }
 
 .ngo-details-card {
-  background-color: #f7e7d0;
+  /* background-color: #f7e7d0;
   border-radius: 15px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
@@ -37,6 +44,15 @@
   width:60%;
   margin-left:20%;
   text-align: justify;
+  font-size:22px; */
+  background-color: #f7e7d0;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 10px;
+  box-shadow: 0 6px 6px rgba(0, 0, 0, 0.1);
+  width: 608px;
+  max-width: 100%;
+  margin: 0 auto 20px auto;
   font-size:22px;
   
 }
