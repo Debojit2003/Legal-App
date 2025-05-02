@@ -155,11 +155,11 @@ const SignupPage = () => {
         </form>
         <div className="auth-socials">
           <button className="social-btn google-btn">
-            <img src={googleLogo} alt="Google Logo" className="social-icon" />
+            <img src={googleLogo} alt="Google Logo" className="socialicon1" />
             Sign up with Google
           </button>
           <button className="social-btn apple-btn">
-            <img src={appleLogo} alt="Apple Logo" className="social-icon" />
+            <img src={appleLogo} alt="Apple Logo" className="socialicon2" />
             Sign up with Apple
           </button>
         </div>
