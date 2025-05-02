@@ -41,7 +41,7 @@ label {
 
 input,
 textarea {
-  margin-bottom: 15px;
+  /* margin-bottom: 15px; */
   padding: 8px;
   border: 1px solid #ddd;
   border-radius: 4px;
@@ -59,3 +59,4 @@ button {
 button:hover {
   background-color: #0056b3;
 }
+
