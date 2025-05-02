@@ -85,9 +85,8 @@ const LawyerPage = () => {
           )}
         </div>
       </nav>
-      <div className="chatbot-container">
-        <Chatbot />
-      </div>
+      <Chatbot />
+      
     </div>
   );
 };
