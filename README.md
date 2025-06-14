@@ -30,3 +30,5 @@ Soumili Lahiri
 Soukarya Mukherjee
 Biraj Karfa
 Debojit Saha
+
+Deployment Link: https://trialtech-86b78.web.app/
