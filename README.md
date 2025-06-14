@@ -1,4 +1,4 @@
-Legal Assistance App
+9Legal Assistance App
 Overview
 The Legal Assistance App is a comprehensive platform designed to provide legal aid and consultation services. This project aims to simplify access to legal resources by connecting users with legal professionals and offering valuable tools for legal research, case tracking, and appointment scheduling.
 
@@ -25,7 +25,7 @@ Node.js (version >= 14.x)
 []
 
 Project Contributors:
-Jit Ghosh [Team Lead]
+Jit Ghosh
 Soumili Lahiri
 Soukarya Mukherjee
 Biraj Karfa
